@@ -7,7 +7,7 @@ Biodata {{ $data->nama }}
     <center>
         <strong>
             <b>
-                <h1>PT SAIND</h1>
+                <h1>PT CMBP</h1>
                 <h2>
                     BIODATA DIREKSI
                 </h2>

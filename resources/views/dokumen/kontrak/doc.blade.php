@@ -23,7 +23,7 @@
         @endif
         @endforeach
         <br><br><br><br><br>
-        NO. {{$data->nomor}}/PK-JAB/SAIND-{{$data->nama_singkatan}}/{{$data->tahun}}
+        NO. {{$data->nomor}}/PK-JAB/CMBP-{{$data->nama_singkatan}}/{{$data->tahun}}
     </strong>
 </div>
 <div class="page-break"></div>
@@ -36,7 +36,7 @@
 </div>
 <div class="row text-pdf">
     <center>
-        Nomor : {{$data->nomor}}/PK-JAB/SAIND-{{$data->nama_singkatan}}/{{$data->tahun}}
+        Nomor : {{$data->nomor}}/PK-JAB/CMBP-{{$data->nama_singkatan}}/{{$data->tahun}}
     </center>
 </div>
 <br>

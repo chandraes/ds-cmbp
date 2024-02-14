@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid text-center">
     <u><strong style="font-size: 14pt">SURAT PERINTAH KERJA</strong></u><br>
-    Nomor : {{sprintf("%03d", $data->nomor)}}/SPK/SAIND-{{$data->nama_singkatan}}/MIP-BP/{{$data->tahun}}
+    Nomor : {{sprintf("%03d", $data->nomor)}}/SPK/CMBP-{{$data->nama_singkatan}}/MIP-BP/{{$data->tahun}}
 </div>
 <br>
 <div class="container-fluid text-10">
@@ -413,8 +413,8 @@
     Tembusan: <br>
     <i>
     <ol type="1">
-        <li>Komisaris PT.SAIND</li>
-        <li>Jajaran Devan Direksi PT. SAIND</li>
+        <li>Komisaris PT.CMBP</li>
+        <li>Jajaran Devan Direksi PT. CMBP</li>
         <li>Pemilik Unit</li>
         <li>Arsip</li>
     </ol>

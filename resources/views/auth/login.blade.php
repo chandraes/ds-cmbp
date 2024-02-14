@@ -4,12 +4,11 @@
     <div>
         <!-- CONTAINER OPEN -->
         <div class="col col-login mx-auto mt-7">
-            <div class="text-center text-white">
+            <div class="text-center text-black">
                 <div class="">
-                    <img src="{{asset('images/saind.png')}}" class="" alt="" width="200">
+                    <img src="{{asset('cmbp.png')}}" class="" alt="" width="200" style="background-color: white">
                 </div>
                 <br>
-                {{-- <h2>SAIND</h2> --}}
                 <p>Login in. To see it in action.</p>
             </div>
         </div>

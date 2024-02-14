@@ -63,7 +63,7 @@
 </head>
 <body>
     <header>
-        <img src="{{public_path('images/saind.png')}}" alt="saind" width="100" style="padding-left: 200px">
+        <img src="{{public_path('cmbp.png')}}" alt="cmbp" width="100" style="padding-left: 200px">
         <br>
         <img src="{{public_path('images/saind-2.jpg')}}" alt="saind" width="170">
     </header>

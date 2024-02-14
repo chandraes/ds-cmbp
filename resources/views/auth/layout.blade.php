@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 		<!-- FAVICON -->
-		<link rel="shortcut icon" type="image/x-icon" href="{{asset('saind.ico')}}" />
+		<link rel="shortcut icon" type="image/x-icon" href="{{asset('cmbp.ico')}}" />
 
          <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -30,7 +30,7 @@
 
 	</head>
 
-	<body class="login-img">
+	<body class="login-img" style="background-color: white">
 
 		<!-- BACKGROUND-IMAGE -->
 		<div>
