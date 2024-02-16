@@ -105,12 +105,12 @@
                 <h2>Nota Void Transaksi</h2>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        {{-- <div class="col-md-3 text-center mt-5">
             <a href="{{route('rekap.stock-barang')}}" class="text-decoration-none">
                 <img src="{{asset('images/stock.svg')}}" alt="" width="100">
                 <h2>Stock Barang</h2>
             </a>
-        </div>
+        </div> --}}
 
 
         <div class="col-md-3 text-center mt-5">

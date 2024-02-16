@@ -82,12 +82,12 @@
                 <h2>Nomor Rekening Transaksi</h2>
             </a>
         </div>
-        <div class="col-md-4 text-center mt-3 mb-3">
+        {{-- <div class="col-md-4 text-center mt-3 mb-3">
             <a href="{{route('kategori-barang.index')}}" class="text-decoration-none">
                 <img src="{{asset('images/stock.svg')}}" alt="" width="100">
                 <h2>Kategori Barang</h2>
             </a>
-        </div>
+        </div> --}}
 
         <div class="col-md-4 text-center mt-3 mb-3">
             <a href="{{route('home')}}" class="text-decoration-none">

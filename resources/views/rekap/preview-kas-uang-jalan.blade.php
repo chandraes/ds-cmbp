@@ -20,7 +20,7 @@
                 <th class="text-center align-middle table-pdf text-pdf">Masuk</th>
                 <th class="text-center align-middle table-pdf text-pdf">Keluar</th>
                 <th class="text-center align-middle table-pdf text-pdf">Saldo</th>
-                <th class="text-center align-middle table-pdf text-pdf">Tambang</th>
+                <th class="text-center align-middle table-pdf text-pdf">Customer</th>
                 <th class="text-center align-middle table-pdf text-pdf">Rute</th>
                 <th class="text-center align-middle table-pdf text-pdf">Cash/Transfer</th>
                 <th class="text-center align-middle table-pdf text-pdf">Bank</th>

@@ -40,7 +40,7 @@
                 <th class="text-center align-middle">Kode</th>
                 <th class="text-center align-middle">Nomor Lambung</th>
                 <th class="text-center align-middle">Vendor</th>
-                <th class="text-center align-middle">Tambang</th>
+                <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Rute</th>
                 <th class="text-center align-middle">Tanggal Muat</th>
                 <th class="text-center align-middle">Nota Muat</th>
@@ -96,7 +96,7 @@
                                                     readonly>
                                             </div>
                                             <div class="col-4 mb-3">
-                                                <label for="tambang" class="form-label">Tambang</label>
+                                                <label for="tambang" class="form-label">Customer</label>
                                                 <input type="text" class="form-control" name="tambang" id="tambang"
                                                     placeholder="" value="{{$d->kas_uang_jalan->customer->singkatan}}"
                                                     readonly>

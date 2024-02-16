@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:loan-vendor')->monthly();
+        //$schedule->command('app:loan-vendor')->monthly();
         // inspire every minute
         // $schedule->command('app:kirim-wa')->everyMinute();
     }

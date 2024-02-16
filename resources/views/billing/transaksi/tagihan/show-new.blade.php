@@ -27,7 +27,7 @@
                         <input type="text" class="form-control" name="vendor" id="vendor" placeholder="" readonly>
                     </div>
                     <div class="col-4 mb-3">
-                        <label for="tambang" class="form-label">Tambang</label>
+                        <label for="tambang" class="form-label">Customer</label>
                         <input type="text" class="form-control" name="tambang" id="tambang" readonly>
                     </div>
                     <div class="col-4 mb-3">

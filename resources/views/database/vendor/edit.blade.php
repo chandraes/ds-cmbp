@@ -86,13 +86,13 @@
             </div>
             <hr>
             <h3>
-                Informasi SO, PPN & PPh
+                Informasi PPN & PPh
             </h3>
             <div class="row mt-3 mb-3">
                 <div class="btn-group mb-3" role="group" data-bs-toggle="buttons">
-                    <label class="btn btn-warning active">
+                    {{-- <label class="btn btn-warning active">
                         <input type="checkbox" class="me-2" name="support_operational" id="support_operational" {{$vendor->support_operational == 1 ? 'checked' : ''}} autocomplete="off"> Support Operational
-                    </label>
+                    </label> --}}
                     <label class="btn btn-warning active">
                         <input type="checkbox" class="me-2" name="ppn" id="ppn" {{$vendor->ppn == 1 ? 'checked' : ''}} autocomplete="off"> PPN & PPh
                     </label>
@@ -138,7 +138,7 @@
                 <label for="pembayaran" class="form-label">Pembayaran</label>
                 <select class="form-select" name="pembayaran" id="pembayaran">
                       <option value="opname" {{$vendor->pembayaran == 'opname' ? 'selected' : ''}}>Opname</option>
-                      <option value="titipan" {{$vendor->pembayaran == 'titipan' ? 'selected' : ''}}>Titipan</option>
+                      {{-- <option value="titipan" {{$vendor->pembayaran == 'titipan' ? 'selected' : ''}}>Titipan</option> --}}
                   </select>
             </div>
             <hr>

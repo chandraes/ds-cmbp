@@ -16,7 +16,7 @@
                 <th class="text-center align-middle table-pdf text-pdf">Nomor Lambung</th>
                 <th class="text-center align-middle table-pdf text-pdf">Uang Jalan</th>
 
-                <th class="text-center align-middle table-pdf text-pdf">Tambang</th>
+                <th class="text-center align-middle table-pdf text-pdf">Customer</th>
                 <th class="text-center align-middle table-pdf text-pdf">Rute</th>
                 <th class="text-center align-middle table-pdf text-pdf">Alasan</th>
             </tr>

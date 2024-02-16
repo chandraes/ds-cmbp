@@ -93,7 +93,7 @@
                                                     value="{{$d->kas_uang_jalan->vendor->nickname}}" readonly>
                                             </div>
                                             <div class="col-4 mb-3">
-                                                <label for="tanggal_muat" class="form-label">Tambang</label>
+                                                <label for="tanggal_muat" class="form-label">Customer</label>
                                                 <input type="text" class="form-control" name="tanggal_muat"
                                                     id="tanggal_muat" placeholder=""
                                                     value="{{$d->kas_uang_jalan->customer->singkatan}}" readonly>

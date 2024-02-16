@@ -203,7 +203,7 @@ class FormKasUangJalanController extends Controller
                     "*UJ".sprintf("%02d",$data['nomor_uang_jalan'])."*\n\n".
                     "Nomor Lambung : ".Vehicle::find($data['vehicle_id'])->nomor_lambung."\n".
                     "Vendor : ".$store->vendor->nama."\n\n".
-                    "Tambang : ".$store->customer->singkatan."\n".
+                    "Customer : ".$store->customer->singkatan."\n".
                     "Rute : ".$store->rute->nama."\n\n".
                     "Nilai :  *Rp. ".number_format($data['nominal_transaksi'], 0, ',', '.').",-*\n\n".
                     "Ditransfer ke rek:\n\n".

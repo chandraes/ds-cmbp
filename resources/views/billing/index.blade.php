@@ -137,13 +137,13 @@
                 <h2>FORM TRANSAKSI</h2>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        {{-- <div class="col-md-3 text-center mt-5">
             <a href="{{route('billing.storing.index')}}" class="text-decoration-none">
                 <img src="{{asset('images/storing.svg')}}" alt="" width="100">
                 <h2>FORM STORING BBM</h2>
             </a>
-        </div>
-        <div class="col-md-3 text-center mt-5">
+        </div> --}}
+        {{-- <div class="col-md-3 text-center mt-5">
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formBarang">
                 <img src="{{asset('images/barang.svg')}}" alt="" width="100">
                 <h2>FORM BARANG</h2>
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <hr>
     <br>

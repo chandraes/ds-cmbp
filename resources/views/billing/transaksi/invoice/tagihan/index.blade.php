@@ -36,7 +36,7 @@
         <thead class="table-success">
             <tr>
                 <th class="text-center align-middle">Tanggal</th>
-                <th class="text-center align-middle">Tambang</th>
+                <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Invoice</th>
                 <th class="text-center align-middle">Total Tagihan</th>
                 <th class="text-center align-middle">Balance</th>

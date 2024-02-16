@@ -48,9 +48,9 @@
         </div>
         <div class="row">
             <div class="col-4 mb-3">
-                <label for="customer_id" class="form-label">Tambang</label>
+                <label for="customer_id" class="form-label">Customer</label>
                 <select class="form-select" name="customer_id" id="customer_id" required>
-                    <option>-- Pilih Tambang --</option>
+                    <option>-- Pilih Customer --</option>
                     @foreach ($customer as $v)
                     <option value="{{$v->id}}">{{$v->singkatan}}</option>
                     @endforeach

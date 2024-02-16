@@ -63,40 +63,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{-- @foreach ($v->rute as $i)
-                <input type="hidden" name="vendor_id" value="{{$id}}">
-                <input type="hidden" name="customer_id[]" value="{{$v->id}}">
-                <input type="hidden" name="rute_id[]" value="{{$i->id}}">
-
-                <div class="col-md-4 mb-3 mt-3" id="rute-{{$v->id}}">
-                       <div class="mb-3">
-                         <label for="rute" class="form-label">Rute</label>
-                         <input type="text"
-                           class="form-control" name="rute" id="rute" aria-describedby="helpId" placeholder="" value="{{$i->nama}}">
-                       </div>
-                </div>
-                <div class="col-md-4 mb-3 mt-3" id="opname-{{$v->id}}">
-                    <label for="hk_opname" class="form-label">Harga Kesepakatan OPNAME</label>
-                    <div class="input-group">
-                        <span class="input-group-text">Rp.</span>
-                        <input type="number" class="form-control" name="hk_opname[]"
-                            id="hk_opname" required aria-describedby="helpId" placeholder="" @if (auth()->user()->role !== 'admin')
-                            readonly
-                        @endif >
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mt-3" id='titipan-{{$v->id}}'>
-                    <label for="hk_titipan" class="form-label">Harga Kesepakatan Titipan</label>
-                    <div class="input-group">
-                        <span class="input-group-text">Rp.</span>
-                        <input type="number" class="form-control" name="hk_titipan[]"
-                            id="hk_titipan" required aria-describedby="helpId" placeholder="" @if (auth()->user()->role !== 'admin')
-                            readonly
-                        @endif>
-                    </div>
-                </div>
-
-                @endforeach --}}
                 <br>
                 <hr>
                 @endforeach

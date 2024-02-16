@@ -92,7 +92,7 @@
                                                     readonly>
                                             </div>
                                             <div class="col-4 mb-3">
-                                                <label for="tambang" class="form-label">Tambang</label>
+                                                <label for="tambang" class="form-label">Customer</label>
                                                 <input type="text" class="form-control" name="tambang" id="tambang"
                                                     placeholder="" value="{{$d->kas_uang_jalan->customer->singkatan}}"
                                                     readonly>

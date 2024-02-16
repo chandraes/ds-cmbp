@@ -100,13 +100,13 @@
             </div>
             <hr>
             <h3>
-                Informasi SO, PPN & PPh
+                Informasi PPN & PPh
             </h3>
             <div class="row mt-3 mb-3">
                 <div class="btn-group mb-3" role="group" data-bs-toggle="buttons">
-                    <label class="btn btn-warning active">
+                    {{-- <label class="btn btn-warning active">
                         <input type="checkbox" class="me-2" name="support_operational" id="support_operational" autocomplete="off"> Support Operational
-                    </label>
+                    </label> --}}
                     <label class="btn btn-warning active">
                         <input type="checkbox" class="me-2" name="ppn" id="ppn" autocomplete="off" > PPN & PPh
                     </label>
@@ -155,8 +155,8 @@
                 <div class="col-12">
                     <label for="pembayaran" class="form-label">Pembayaran</label>
                     <select class="form-select" name="pembayaran" id="pembayaran">
-                        <option value="opname">Opname</option>
-                        <option value="titipan">Titipan</option>
+                        <option value="opname" selected>Opname</option>
+                        {{-- <option value="titipan">Titipan</option> --}}
                     </select>
                 </div>
             </div>

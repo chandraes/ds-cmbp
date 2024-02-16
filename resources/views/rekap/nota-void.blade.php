@@ -71,7 +71,7 @@
                 <th class="text-center align-middle">Nama Vendor</th>
                 <th class="text-center align-middle">Nomor Lambung</th>
                 <th class="text-center align-middle">Uang Jalan</th>
-                <th class="text-center align-middle">Tambang</th>
+                <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Rute</th>
                 <th class="text-center align-middle">Alasan Void</th>
             </tr>

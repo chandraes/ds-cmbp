@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4">
                     <div class="mb-3">
-                        <label for="nomor_lambung" class="form-label">Tambang</label>
+                        <label for="nomor_lambung" class="form-label">Customer</label>
                         <input type="text" class="form-control" name="nomor_lambung" id="nomor_lambung"
                             value="{{ $data->kas_uang_jalan->customer->singkatan }}" disabled>
                     </div>

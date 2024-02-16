@@ -93,7 +93,7 @@
                 <th class="text-center align-middle">Masuk</th>
                 <th class="text-center align-middle">Keluar</th>
                 <th class="text-center align-middle">Saldo</th>
-                <th class="text-center align-middle">Tambang</th>
+                <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Rute</th>
                 <th class="text-center align-middle">Cash/Transfer</th>
                 <th class="text-center align-middle">Bank</th>

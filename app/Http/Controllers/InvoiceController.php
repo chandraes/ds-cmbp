@@ -129,7 +129,7 @@ class InvoiceController extends Controller
             $pesan ="🔵🔵🔵🔵🔵🔵🔵🔵🔵\n".
                 "*Invoice Tagihan*\n".
                  "🔵🔵🔵🔵🔵🔵🔵🔵🔵\n\n".
-                 "Tambang : ".$invoice->customer->singkatan."\n".
+                 "Customer : ".$invoice->customer->singkatan."\n".
                 "Periode : ".$invoice->no_invoice."\n\n".
                  "Nilai :  *Rp. ".number_format($data['nominal_transaksi'], 0, ',', '.')."*\n\n".
                  "Ditransfer ke rek:\n\n".
@@ -207,7 +207,7 @@ class InvoiceController extends Controller
             $pesan ="🔵🔵🔵🔵🔵🔵🔵🔵🔵\n".
                 "*Invoice Tagihan Cicil*\n".
                  "🔵🔵🔵🔵🔵🔵🔵🔵🔵\n\n".
-                 "Tambang : ".$invoice->customer->singkatan."\n".
+                 "Customer : ".$invoice->customer->singkatan."\n".
                 "Periode : ".$invoice->periode."\n\n".
                  "Nilai :  *Rp. ".number_format($data['nominal_transaksi'], 0, ',', '.')."*\n\n".
                  "Ditransfer ke rek:\n\n".

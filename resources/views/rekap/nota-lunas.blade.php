@@ -68,7 +68,7 @@
             <thead class=" table-success">
             <tr>
                 <th class="text-center align-middle">Tanggal</th>
-                <th class="text-center align-middle">Tambang</th>
+                <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Periode</th>
                 <th class="text-center align-middle">Nominal</th>
             </tr>
