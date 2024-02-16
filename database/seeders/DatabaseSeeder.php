@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             RekeningSeeder::class,
             GroupWaSeeder::class,
             RekeningTambahSeeder::class,
+            GroupWaNew::class,
         ]);
     }
 }
