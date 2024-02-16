@@ -19,5 +19,7 @@ class RekeningTambahSeeder extends Seeder
             'nomor_rekening' => '1234567890',
             'nama_rekening' => 'PT. ABC',
         ]);
+
+        Rekening::where('untuk', 'mekanik')->delete();
     }
 }

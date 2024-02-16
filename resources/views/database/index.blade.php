@@ -21,12 +21,12 @@
                 <h2>Customer</h2>
             </a>
         </div>
-        <div class="col-md-4 text-center mt-3 mb-3">
+        {{-- <div class="col-md-4 text-center mt-3 mb-3">
             <a href="{{route('bbm-storing.index')}}" class="text-decoration-none">
                 <img src="{{asset('images/bbm.svg')}}" alt="" width="100">
                 <h2>BBM Storing</h2>
             </a>
-        </div>
+        </div> --}}
         @endif
     </div>
     <hr>
