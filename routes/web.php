@@ -121,14 +121,14 @@ Route::group(['middleware' => ['auth']], function() {
             'index','store','update','destroy'
         ]);
 
-        Route::resource('kategori-barang', App\Http\Controllers\KategoriBarangController::class);
-        Route::post('database/kategori-barang-store', [App\Http\Controllers\KategoriBarangController::class, 'kategori_store'])->name('database.kategori-barang-store');
-        Route::delete('database/kategori-barang-destroy/{kategori}', [App\Http\Controllers\KategoriBarangController::class, 'kategori_destroy'])->name('database.kategori-barang-destroy');
-        Route::patch('database/kategori-barang-update/{kategori}', [App\Http\Controllers\KategoriBarangController::class, 'kategori_update'])->name('database.kategori-barang-update');
+        // Route::resource('kategori-barang', App\Http\Controllers\KategoriBarangController::class);
+        // Route::post('database/kategori-barang-store', [App\Http\Controllers\KategoriBarangController::class, 'kategori_store'])->name('database.kategori-barang-store');
+        // Route::delete('database/kategori-barang-destroy/{kategori}', [App\Http\Controllers\KategoriBarangController::class, 'kategori_destroy'])->name('database.kategori-barang-destroy');
+        // Route::patch('database/kategori-barang-update/{kategori}', [App\Http\Controllers\KategoriBarangController::class, 'kategori_update'])->name('database.kategori-barang-update');
 
-        Route::resource('barang', App\Http\Controllers\BarangController::class)->only([
-            'store','update','destroy'
-        ]);
+        // Route::resource('barang', App\Http\Controllers\BarangController::class)->only([
+        //     'store','update','destroy'
+        // ]);
 
         Route::resource('vehicle', App\Http\Controllers\VehicleController::class);
         Route::get('print-preview-vehicle', [App\Http\Controllers\VehicleController::class, 'print_preview_vehicle'])->name('print-preview-vehicle');
@@ -193,15 +193,15 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('kas-uang-jalan/get-uang-jalan', [App\Http\Controllers\FormKasUangJalanController::class, 'get_uang_jalan'])->name('kas-uang-jalan.get-uang-jalan');
 
         // Form Barang
-        Route::get('billing/form-barang/beli', [App\Http\Controllers\FormBarangController::class, 'beli'])->name('billing.form-barang.beli');
-        Route::get('billing/form-barang/get-barang', [App\Http\Controllers\FormBarangController::class, 'get_barang'])->name('billing.form-barang.get-barang');
-        Route::post('billing/form-barang/keranjang-store', [App\Http\Controllers\FormBarangController::class, 'keranjang_store'])->name('billing.form-barang.keranjang-store');
-        Route::delete('billing/form-barang/keranjang-destroy/{keranjang}', [App\Http\Controllers\FormBarangController::class, 'keranjang_destroy'])->name('billing.form-barang.keranjang-destroy');
-        Route::get('billing/form-barang/keranjang-empty', [App\Http\Controllers\FormBarangController::class, 'keranjang_empty'])->name('billing.form-barang.keranjang-empty');
-        Route::get('billing/form-barang/barang-store', [App\Http\Controllers\FormBarangController::class, 'beli_store'])->name('billing.form-barang.barang-store');
-        Route::get('billing/form-barang/jual', [App\Http\Controllers\FormBarangController::class, 'jual'])->name('billing.form-barang.jual');
-        Route::post('billing/form-barang/jual-store', [App\Http\Controllers\FormBarangController::class, 'jual_store'])->name('billing.form-barang.jual-store');
-        Route::get('billing/form-barang/get-harga-jual', [App\Http\Controllers\FormBarangController::class, 'get_harga_jual'])->name('billing.form-barang.get-harga-jual');
+        // Route::get('billing/form-barang/beli', [App\Http\Controllers\FormBarangController::class, 'beli'])->name('billing.form-barang.beli');
+        // Route::get('billing/form-barang/get-barang', [App\Http\Controllers\FormBarangController::class, 'get_barang'])->name('billing.form-barang.get-barang');
+        // Route::post('billing/form-barang/keranjang-store', [App\Http\Controllers\FormBarangController::class, 'keranjang_store'])->name('billing.form-barang.keranjang-store');
+        // Route::delete('billing/form-barang/keranjang-destroy/{keranjang}', [App\Http\Controllers\FormBarangController::class, 'keranjang_destroy'])->name('billing.form-barang.keranjang-destroy');
+        // Route::get('billing/form-barang/keranjang-empty', [App\Http\Controllers\FormBarangController::class, 'keranjang_empty'])->name('billing.form-barang.keranjang-empty');
+        // Route::get('billing/form-barang/barang-store', [App\Http\Controllers\FormBarangController::class, 'beli_store'])->name('billing.form-barang.barang-store');
+        // Route::get('billing/form-barang/jual', [App\Http\Controllers\FormBarangController::class, 'jual'])->name('billing.form-barang.jual');
+        // Route::post('billing/form-barang/jual-store', [App\Http\Controllers\FormBarangController::class, 'jual_store'])->name('billing.form-barang.jual-store');
+        // Route::get('billing/form-barang/get-harga-jual', [App\Http\Controllers\FormBarangController::class, 'get_harga_jual'])->name('billing.form-barang.get-harga-jual');
 
         Route::get('transaksi/nota-muat', [App\Http\Controllers\TransaksiController::class, 'nota_muat'])->name('transaksi.nota-muat');
         Route::patch('transaksi/nota-muat/update/{transaksi}', [App\Http\Controllers\TransaksiController::class, 'nota_muat_update'])->name('transaksi.nota-muat.update');
@@ -231,7 +231,7 @@ Route::group(['middleware' => ['auth']], function() {
         // Route::post('transaksi/nota-tagihan/{customer}/lanjut', [App\Http\Controllers\TransaksiController::class, 'nota_tagihan_lanjut'])->name('transaksi.nota-tagihan.lanjut');
         Route::post('transaksi/nota-tagihan-lanjut-pilih/{customer}', [App\Http\Controllers\TransaksiController::class, 'nota_tagihan_lanjut_pilih'])->name('transaksi.nota-tagihan.lanjut-pilih');
 
-        Route::resource('bbm-storing', App\Http\Controllers\BbmStoringController::class);
+        // Route::resource('bbm-storing', App\Http\Controllers\BbmStoringController::class);
 
         // form vendor
         Route::get('billing/vendor/titipan', [App\Http\Controllers\FormVendorController::class, 'titipan'])->name('billing.vendor.titipan');
@@ -284,13 +284,13 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('billing/transaksi/invoice/bonus/{invoiceBonus}/detail', [App\Http\Controllers\InvoiceController::class, 'invoice_bonus_detail'])->name('invoice.bonus.detail');
         Route::post('billing/transaksi/invoice/bonus/{invoice}/lunas', [App\Http\Controllers\InvoiceController::class, 'invoice_bonus_lunas'])->name('invoice.bonus.lunas');
 
-        Route::get('billing/storing/index', [App\Http\Controllers\FormStoringConroller::class, 'index'])->name('billing.storing.index');
-        Route::post('billing/storing/store', [App\Http\Controllers\FormStoringConroller::class, 'store'])->name('billing.storing.store');
-        Route::get('billing/storing/void', [App\Http\Controllers\FormStoringConroller::class, 'void'])->name('billing.storing.void');
-        Route::get('billing/storing/get-storing', [App\Http\Controllers\FormStoringConroller::class, 'get_storing'])->name('billing.storing.get-storing');
-        Route::get('billing/storing/get-status-so', [App\Http\Controllers\FormStoringConroller::class, 'get_status_so'])->name('billing.storing.get-status-so');
-        Route::get('billing/storing/get-vendor', [App\Http\Controllers\FormStoringConroller::class, 'get_vendor'])->name('billing.storing.get-vendor');
-        Route::get('billing/storing/storing-latest', [App\Http\Controllers\FormStoringConroller::class, 'storing_latest'])->name('billing.storing.storing-latest');
+        // Route::get('billing/storing/index', [App\Http\Controllers\FormStoringConroller::class, 'index'])->name('billing.storing.index');
+        // Route::post('billing/storing/store', [App\Http\Controllers\FormStoringConroller::class, 'store'])->name('billing.storing.store');
+        // Route::get('billing/storing/void', [App\Http\Controllers\FormStoringConroller::class, 'void'])->name('billing.storing.void');
+        // Route::get('billing/storing/get-storing', [App\Http\Controllers\FormStoringConroller::class, 'get_storing'])->name('billing.storing.get-storing');
+        // Route::get('billing/storing/get-status-so', [App\Http\Controllers\FormStoringConroller::class, 'get_status_so'])->name('billing.storing.get-status-so');
+        // Route::get('billing/storing/get-vendor', [App\Http\Controllers\FormStoringConroller::class, 'get_vendor'])->name('billing.storing.get-vendor');
+        // Route::get('billing/storing/storing-latest', [App\Http\Controllers\FormStoringConroller::class, 'storing_latest'])->name('billing.storing.storing-latest');
 
 
         Route::get('rekap/kas-besar', [App\Http\Controllers\RekapController::class, 'kas_besar'])->name('rekap.kas-besar');
