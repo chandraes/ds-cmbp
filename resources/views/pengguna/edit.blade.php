@@ -25,9 +25,10 @@
                         <div class="row mt-2">
                             <div class="col-md-12">
                                 <label for="role" class="form-label">Role</label>
-                                <select class="form-select" name="role" id="role-{{$d->id}}" onchange="roleChangeEdit()">
+                                <select class="form-select" name="role" id="role-{{$d->id}}" onchange="roleChangeEdit{{$d->id}}()">
                                     <option value="admin" {{$d->role == 'admin' ? 'selected' : ''}}>Admin</option>
                                     <option value="vendor" {{$d->role == 'vendor' ? 'selected' : ''}}>Vendor</option>
+                                    <option value="customer" {{$d->role == 'customer' ? 'selected' : ''}}>Customer</option>
                                     <option value="user" {{$d->role == 'user' ? 'selected' : ''}}>User</option>
                                 </select>
                             </div>
@@ -62,8 +63,8 @@
                                 <div class="form-group mt-2">
                                     <label for="passwordInput">Password</label>
                                     <div class="input-group">
-                                        <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Kosongkan Jika Tidak Mengganti">
-                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <input type="password" name="password" class="form-control" id="passwordInput-{{$d->id}}" placeholder="Kosongkan Jika Tidak Mengganti">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword-{{$d->id}}">
                                             <i class="fa fa-eye"></i>
                                         </button>
                                     </div>
@@ -80,17 +81,49 @@
     </div>
 </div>
 <script>
-    function roleChangeEdit() {
+    const passwordInput{{$d->id}} = document.getElementById("passwordInput-{{$d->id}}");
+    const togglePasswordButton{{$d->id}} = document.getElementById("togglePassword-{{$d->id}}");
 
-        var role = document.getElementById('role-{{$d->id}}').value;
-        if (role === 'vendor') {
-            document.getElementById('divVendor-{{$d->id}}').hidden = false;
-            // vendor_id required
-            document.getElementById('vendor_id-{{$d->id}}').required = true;
-        } else {
-            document.getElementById('divVendor-{{$d->id}}').hidden = true;
-            // vendor_id not required
-            document.getElementById('vendor_id-{{$d->id}}').required = false;
+    togglePasswordButton{{$d->id}}.addEventListener("click", function () {
+      if (passwordInput{{$d->id}}.type === "password") {
+        passwordInput{{$d->id}}.type = "text";
+        togglePasswordButton{{$d->id}}.innerHTML = '<i class="fa fa-eye-slash"></i>';
+      } else {
+        passwordInput{{$d->id}}.type = "password";
+        togglePasswordButton{{$d->id}}.innerHTML = '<i class="fa fa-eye"></i>';
+      }
+    });
+</script>
+<script>
+     function roleChangeEdit{{$d->id}}() {
+            var role = document.getElementById('role-{{$d->id}}').value;
+            if (role == 'vendor') {
+                document.getElementById('divVendor-{{$d->id}}').hidden = false;
+                document.getElementById('divCustomer-{{$d->id}}').hidden = true;
+                // vendor_id required
+                document.getElementById('vendor_id-{{$d->id}}').disabled = false;
+                document.getElementById('vendor_id-{{$d->id}}').required = true;
+                document.getElementById('customer_id-{{$d->id}}').required = false;
+            } else if(role == 'customer') {
+                document.getElementById('divCustomer-{{$d->id}}').hidden = false;
+                document.getElementById('divVendor-{{$d->id}}').hidden = true;
+                // vendor_id required
+                document.getElementById('customer_id-{{$d->id}}').disabled = false;
+                document.getElementById('customer_id-{{$d->id}}').required = true;
+                document.getElementById('vendor_id-{{$d->id}}').required = false;
+
+
+            } else {
+                document.getElementById('divVendor-{{$d->id}}').hidden = true;
+                document.getElementById('divCustomer-{{$d->id}}').hidden = true;
+                // vendor_id not required
+                // disable vendor_id and customer_id
+
+                document.getElementById('customer_id-{{$d->id}}').disabled = true;
+                document.getElementById('vendor_id-{{$d->id}}').disabled = true;
+
+                document.getElementById('customer_id-{{$d->id}}').required = false;
+                document.getElementById('vendor_id-{{$d->id}}').required = false;
+            }
         }
-    }
 </script>
