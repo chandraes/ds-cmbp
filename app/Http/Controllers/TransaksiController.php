@@ -160,13 +160,9 @@ class TransaksiController extends Controller
         if ($transaksi->kas_uang_jalan->vendor->pembayaran == 'opname') {
             $data['nominal_bayar'] = $data['timbangan_bongkar']  * $transaksi->kas_uang_jalan->rute->jarak * $transaksi->harga_vendor;
 
-            $harga = $transaksi->kas_uang_jalan->rute->jarak > 50 ? 1000 : 500;
-
-
         } elseif ($transaksi->kas_uang_jalan->vendor->pembayaran == 'titipan') {
             $data['nominal_bayar'] = $data['timbangan_bongkar']  * $transaksi->kas_uang_jalan->rute->jarak * $transaksi->harga_vendor;
 
-            $harga = $transaksi->kas_uang_jalan->rute->jarak > 50 ? 500 : 250;
         }
 
         $data['nominal_csr'] = 0;
@@ -176,7 +172,9 @@ class TransaksiController extends Controller
             $data['nominal_csr'] = $data['timbangan_bongkar'] * $transaksi->harga_csr;
         }
 
-        $data['nominal_bonus'] = $data['timbangan_bongkar'] * $harga;
+        $persen_bonus = $transaksi->kas_uang_jalan->vendor->sponsor->persen_bonus ?? 0;
+
+        $data['nominal_bonus'] = (($data['nominal_tagihan'] *0.98) - $data['nominal_bayar'] - $data['nominal_csr']) * ($persen_bonus / 100);
 
         $data['profit'] = ($data['nominal_tagihan'] * 0.98) - $data['nominal_bayar'] - $data['nominal_bonus'] - $data['nominal_csr'];
 
@@ -522,11 +520,9 @@ class TransaksiController extends Controller
 
         if ($transaksi->kas_uang_jalan->vendor->pembayaran == 'opname') {
             $data['nominal_bayar'] = $data['timbangan_bongkar']  * $transaksi->kas_uang_jalan->rute->jarak * $transaksi->harga_vendor;
-            $harga = $transaksi->kas_uang_jalan->rute->jarak > 50 ? 1000 : 500;
 
         } elseif ($transaksi->kas_uang_jalan->vendor->pembayaran == 'titipan') {
             $data['nominal_bayar'] = $data['timbangan_bongkar']  * $transaksi->kas_uang_jalan->rute->jarak * $transaksi->harga_vendor;
-            $harga = $transaksi->kas_uang_jalan->rute->jarak > 50 ? 500 : 250;
         }
 
         $data['nominal_csr'] = 0;
@@ -536,7 +532,9 @@ class TransaksiController extends Controller
             $data['nominal_csr'] = $data['timbangan_bongkar'] * $transaksi->harga_csr;
         }
 
-        $data['nominal_bonus'] = $data['timbangan_bongkar'] * $harga;
+        $persen_bonus = $transaksi->kas_uang_jalan->vendor->sponsor->persen_bonus ?? 0;
+
+        $data['nominal_bonus'] = (($data['nominal_tagihan'] *0.98) - $data['nominal_bayar'] - $data['nominal_csr']) * ($persen_bonus / 100);
         //rumus bonus (tagihan * -0.98)-bayar-csr * (persenan sponsor / 100)
 
         $data['profit'] = ($data['nominal_tagihan'] *0.98) - $data['nominal_bayar'] - $data['nominal_bonus'] - $data['nominal_csr'];
