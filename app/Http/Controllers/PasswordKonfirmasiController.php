@@ -9,6 +9,10 @@ class PasswordKonfirmasiController extends Controller
 {
     public function store(Request $request)
     {
+        if (!in_array(auth()->user->id, [1,2])) {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses');
+        }
+
         $data = $request->validate([
             'password' => 'required',
         ]);
