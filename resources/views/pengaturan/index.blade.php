@@ -32,6 +32,7 @@ $password = \App\Models\PasswordKonfirmasi::first();
                 <h2>Whatsapp</h2>
             </a>
         </div>
+        @if (in_array(auth()->user()->id, [1,2]))
         <div class="col-md-3 text-center mb-5">
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#passwordKonfirmasi">
                 <img src="{{asset('images/password.svg')}}" alt="" width="100">
@@ -68,13 +69,15 @@ $password = \App\Models\PasswordKonfirmasi::first();
                 </div>
             </div>
         </div>
+        @endif
+
     </div>
-    <div class="col-md-3 text-center mb-5">
+    {{-- <div class="col-md-3 text-center mb-5">
         <a href="{{route('pengaturan.nota-transaksi')}}" class="text-decoration-none">
             <img src="{{asset('images/konfigurasi.svg')}}" alt="" width="100">
             <h2>Konfigurasi Nota Transaksi</h2>
         </a>
-    </div>
+    </div> --}}
     @endif
     <div class="col-md-3 text-center">
         <a href="{{route('home')}}" class="text-decoration-none">
