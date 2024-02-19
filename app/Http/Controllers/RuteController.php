@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rute;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class RuteController extends Controller
@@ -65,7 +66,16 @@ class RuteController extends Controller
      */
     public function destroy(Rute $rute)
     {
-        $rute->delete();
+        DB::beginTransaction();
+
+        try {
+            $rute->vendor_uang_jalan()->delete();
+            $rute->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('rute.index')->with('error', $e->getMessage());
+        }
 
         return redirect()->route('rute.index')->with('success', 'Rute berhasil dihapus');
     }

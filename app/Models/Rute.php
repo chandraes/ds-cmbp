@@ -33,5 +33,10 @@ class Rute extends Model
         return $this->belongsToMany(Customer::class, 'customer_rute', 'rute_id', 'customer_id');
     }
 
-    
+    public function vendor_uang_jalan()
+    {
+        return $this->hasMany(VendorUangJalan::class);
+    }
+
+
 }

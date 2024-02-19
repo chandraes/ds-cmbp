@@ -537,6 +537,7 @@ class TransaksiController extends Controller
         }
 
         $data['nominal_bonus'] = $data['timbangan_bongkar'] * $harga;
+        //rumus bonus (tagihan * -0.98)-bayar-csr * (persenan sponsor / 100)
 
         $data['profit'] = ($data['nominal_tagihan'] *0.98) - $data['nominal_bayar'] - $data['nominal_bonus'] - $data['nominal_csr'];
 

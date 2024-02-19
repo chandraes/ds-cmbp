@@ -47,7 +47,7 @@
                 <th class="text-center align-middle">Nama CP</th>
                 <th class="text-center align-middle">Nama Perusahaan</th>
                 <th class="text-center align-middle">Nickname</th>
-                <th class="text-center align-middle">Pembayaran</th>
+                {{-- <th class="text-center align-middle">Pembayaran</th> --}}
                 {{-- <th class="text-center align-middle">SO</th> --}}
                 <th class="text-center align-middle">PPN & PPh</th>
                 <th class="text-center align-middle">Plafon Cash</th>
@@ -65,11 +65,11 @@
                 <td class="align-middle"><a href="{{route('vendor.show', $d->id)}}"><strong>{{$d->nama}}</strong></a></td>
                 <td class="align-middle">{{$d->perusahaan}}</td>
                 <td class="align-middle">{{$d->nickname}}</td>
-                <td class="text-center align-middle @if ($d->pembayaran == 'titipan')
+                {{-- <td class="text-center align-middle @if ($d->pembayaran == 'titipan')
                     text-danger
                 @endif">
                     {{strtoupper($d->pembayaran)}}
-                </td>
+                </td> --}}
                 {{-- <td class="text-center align-middle">
                     @if ($d->support_operational == 1)
                     <i class="fa fa-check-circle text-success" style="font-size: 25px"></i>
