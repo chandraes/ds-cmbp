@@ -10,7 +10,7 @@
     <form action="{{route('billing.deviden.store')}}" method="post" id="masukForm">
         @csrf
         <div class="row">
-            <div class="col-4 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="text" class="form-control @if ($errors->has('tanggal'))
                     is-invalid
@@ -27,6 +27,19 @@
                 @if ($errors->has('nominal_transaksi'))
                 <div class="invalid-feedback">
                     {{$errors->first('nominal_transaksi')}}
+                </div>
+                @endif
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="uraian" class="form-label">Uraian</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control @if ($errors->has('uraian'))
+                    is-invalid
+                @endif" name="uraian" id="uraian" required maxlength="20">
+                </div>
+                @if ($errors->has('uraian'))
+                <div class="invalid-feedback">
+                    {{$errors->first('uraian')}}
                 </div>
                 @endif
             </div>

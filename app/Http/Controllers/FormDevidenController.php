@@ -40,6 +40,7 @@ class FormDevidenController extends Controller
     {
         $data = $request->validate([
             'nominal_transaksi' => 'required',
+            'uraian' => 'required',
         ]);
 
         $data['nominal_transaksi'] = str_replace('.', '', $data['nominal_transaksi']);
@@ -70,7 +71,7 @@ class FormDevidenController extends Controller
 
                 $k['tanggal'] = date('Y-m-d');
                 $k['jenis_transaksi_id'] = 2;
-                $k['uraian'] = "Bagi Deviden ".$v->nama;
+                $k['uraian'] = "Bagi Deviden ".$v->nama. " ".$data['uraian'];
                 $k['nominal_transaksi'] = $nilai2;
                 $k['saldo'] = $last2->saldo - $nilai2;
                 $k['transfer_ke'] = substr($v->nama_rekening, 0, 15);
@@ -81,9 +82,10 @@ class FormDevidenController extends Controller
                 $store = KasBesar::create($k);
 
                 $pesan =    "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n".
-                            "*Form Deviden ".$month."*\n".
+                            "*Form Deviden*\n".
                             "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n\n".
                             "Nama  : ".$v->nama."\n".
+                            "Uraian : ".$k['uraian']."\n".
                             "Nilai :  *Rp. ".number_format($k['nominal_transaksi'], 0, ',', '.')."*\n\n".
                             "Ditransfer ke rek:\n\n".
                             "Bank      : ".$k['bank']."\n".
