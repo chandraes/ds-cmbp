@@ -15,7 +15,8 @@ class Sponsor extends Model
         'nomor_wa',
         'transfer_ke',
         'nama_bank',
-        'nomor_rekening'
+        'nomor_rekening',
+        'persen_bonus',
     ];
 
     public function vendor()

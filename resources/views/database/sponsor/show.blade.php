@@ -7,16 +7,29 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text"
                           class="form-control" name="nama" id="nama" aria-describedby="helpId" placeholder="" disabled value="{{$d->nama}}">
                       </div>
-                      <div class="col-6 mb-3">
+                      <div class="col-md-4 mb-3">
                         <label for="nomor_wa" class="form-label">Nomor WA</label>
                         <input type="text"
                           class="form-control" name="nomor_wa" id="nomor_wa" aria-describedby="helpId" placeholder="" disabled value="{{$d->nomor_wa}}">
                       </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="nama" class="form-label">Persentase Bonus</label>
+                        <div class="input-group mb-3">
+                            <input
+                                type="number"
+                                name="persen_bonus"
+                                id="persen_bonus"
+                                class="form-control" placeholder="" value="{{$d->persen_bonus}}"
+                                aria-describedby="prefixId" disabled
+                            />
+                            <span class="input-group-text" id="prefixId">%</span>
+                        </div>
+                    </div>
                       <hr>
                       <h4>INFO REKENING</h4>
                       <hr>

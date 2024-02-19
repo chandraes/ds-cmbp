@@ -29,6 +29,7 @@ class SponsorController extends Controller
             'nama_bank' => 'required',
             'nomor_rekening' => 'required',
             'transfer_ke' => 'required',
+            'persen_bonus' => 'required|numeric',
         ]);
 
         $nomor = Sponsor::latest()->first();
@@ -55,6 +56,7 @@ class SponsorController extends Controller
             'nama_bank' => 'required',
             'nomor_rekening' => 'required',
             'transfer_ke' => 'required',
+            'persen_bonus' => 'required|numeric',
         ]);
 
         $sponsor->update($data);
