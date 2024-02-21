@@ -35,6 +35,7 @@
                 <th class="text-center align-middle">Bank</th>
                 <th class="text-center align-middle">Nama Rekening</th>
                 <th class="text-center align-middle">Nomor Rekening</th>
+                <th class="text-center align-middle">Persentase Bonus (%)</th>
                 <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
@@ -54,6 +55,7 @@
                     <td class="text-center align-middle">{{$d->nama_bank}}</td>
                     <td class="text-center align-middle">{{$d->transfer_ke}}</td>
                     <td class="text-center align-middle">{{$d->nomor_rekening}}</td>
+                    <td class="text-center align-middle">{{$d->persen_bonus}}</td>
                     <td class="text-center align-middle">
                        {{-- button delete with sweetalert confirmation --}}
                         <form action="{{route('sponsor.destroy',$d->id)}}" method="post">
