@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\PasswordKonfirmasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PasswordKonfirmasiController extends Controller
 {
     public function store(Request $request)
     {
-        if (!in_array(auth()->user->id, [1,2])) {
+        $id = [1,2];
+
+        if (!in_array(Auth::user()->id, $id)){
             return redirect()->back()->with('error', 'Anda tidak memiliki akses');
         }
 
