@@ -165,16 +165,9 @@
 <link href="{{asset('assets/css/dt.min.css')}}" rel="stylesheet">
 @endpush
 @push('js')
-{{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> --}}
 <script src="{{asset('assets/js/dt5.min.js')}}"></script>
 <script>
     $(document).ready(function(){
-            $('#nominal_transaksi').maskMoney({
-                thousands: '.',
-                decimal: ',',
-                precision: 0,
-                allowZero: true,
-            });
             $('#rekapTable').DataTable({
                 "paging": false,
                 "ordering": false,

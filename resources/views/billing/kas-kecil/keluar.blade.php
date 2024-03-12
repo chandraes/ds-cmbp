@@ -90,15 +90,13 @@
 </div>
 @endsection
 @push('js')
-{{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> --}}
-
 <script>
-            $('#nominal_transaksi').maskMoney({
-                thousands: '.',
-                decimal: ',',
-                precision: 0,
-                allowZero: true,
-            });
+          var nominal = new Cleave('#nominal_transaksi', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand',
+            numeralDecimalMark: ',',
+            delimiter: '.'
+        });
 
         function tipeFun()
         {

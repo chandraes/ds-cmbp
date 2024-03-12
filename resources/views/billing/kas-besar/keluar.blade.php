@@ -88,11 +88,11 @@
 @push('js')
     <script>
        $(document).ready(function(){
-            $('#nominal_transaksi').maskMoney({
-                thousands: '.',
-                decimal: ',',
-                precision: 0,
-                allowZero: true,
+        var nominal = new Cleave('#nominal_transaksi', {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand',
+                numeralDecimalMark: ',',
+                delimiter: '.'
             });
         });
 
