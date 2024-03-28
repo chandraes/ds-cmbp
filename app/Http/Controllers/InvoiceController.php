@@ -14,6 +14,7 @@ use App\Models\Vendor;
 use App\Models\KasVendor;
 use App\Models\Rekening;
 use App\Models\GroupWa;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Services\StarSender;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -126,8 +127,12 @@ class InvoiceController extends Controller
                 }
             }
 
+            $t = new Transaksi();
+
+            $totalNotaTagihan = $t->sumNotaTagihan($invoice->customer_id);
+
             $pesan ="🔵🔵🔵🔵🔵🔵🔵🔵🔵\n".
-                "*Invoice Tagihan*\n".
+                "*PEMBAYARAN INVOICE*\n".
                  "🔵🔵🔵🔵🔵🔵🔵🔵🔵\n\n".
                  "Customer : ".$invoice->customer->singkatan."\n".
                 "Periode : ".$invoice->no_invoice."\n\n".
@@ -141,6 +146,9 @@ class InvoiceController extends Controller
                 "Rp. ".number_format($store->saldo, 0, ',', '.')."\n\n".
                 "Total Modal Investor : \n".
                 "Rp. ".number_format($store->modal_investor_terakhir, 0, ',', '.')."\n\n".
+                "Tagihan : \n".
+                "Rp. ".number_format($totalNotaTagihan, 0, ',', '.')."\n\n".
+                "Invoice : \n".
                 $invoiceSisaString."\n".
                 "Terima kasih 🙏🙏🙏\n";
             $send = new StarSender($group->nama_group, $pesan);
@@ -205,7 +213,7 @@ class InvoiceController extends Controller
             $store = KasBesar::create($data);
 
             $pesan ="🔵🔵🔵🔵🔵🔵🔵🔵🔵\n".
-                "*Invoice Tagihan Cicil*\n".
+                "*CICILAN INVOICE*\n".
                  "🔵🔵🔵🔵🔵🔵🔵🔵🔵\n\n".
                  "Customer : ".$invoice->customer->singkatan."\n".
                 "Periode : ".$invoice->periode."\n\n".
