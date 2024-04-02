@@ -125,6 +125,8 @@ class InvoiceController extends Controller
                     $invoiceSisaString .= $v->periode.' : Rp. '.number_format($v->sisa_tagihan, 0, ',', '.');
                     $invoiceSisaString .= "\n";
                 }
+            } else {
+                $invoiceSisaString = '0';
             }
 
             $t = new Transaksi();
@@ -149,7 +151,7 @@ class InvoiceController extends Controller
                 "Tagihan : \n".
                 "Rp. ".number_format($totalNotaTagihan, 0, ',', '.')."\n\n".
                 "Invoice : \n".
-                $invoiceSisaString."\n".
+                $invoiceSisaString."\n\n".
                 "Terima kasih 🙏🙏🙏\n";
             $send = new StarSender($group->nama_group, $pesan);
             $res = $send->sendGroup();
