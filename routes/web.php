@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::get('/invoice-tagihan-back/{invoice}', [App\Http\Controllers\InvoiceController::class, 'invoice_tagihan_back'])->name('invoice.tagihan-back.execute');
 
+        Route::post('/statistik/ban-luar/store', [App\Http\Controllers\BanController::class, 'log_store'])->name('statistik.ban-luar.store');
+
         Route::prefix('bypass')->group(function(){
             Route::get('/', [App\Http\Controllers\ByPassVendorController::class, 'index'])->name('bypass.index');
             Route::get('/kas-direksi', [App\Http\Controllers\ByPassVendorController::class, 'kas_direksi'])->name('bypass-kas-direksi.index');
@@ -352,6 +354,13 @@ Route::group(['middleware' => ['auth']], function() {
             Route::get('/perform-vendor', [App\Http\Controllers\StatistikController::class, 'perform_vendor'])->name('statistik.perform-vendor');
 
             Route::get('/upah-gendong', [App\Http\Controllers\StatistikController::class, 'upah_gendong'])->name('statistik.upah-gendong');
+
+            Route::prefix('ban-luar')->group(function(){
+                Route::get('/', [App\Http\Controllers\BanController::class, 'index'])->name('statistik.ban-luar');
+                Route::get('/{vehicle}/{posisi}/histori', [App\Http\Controllers\BanController::class, 'histori'])->name('statistik.ban-luar.histori');
+                Route::get('/histori-data', [App\Http\Controllers\BanController::class, 'histori_data'])->name('statistik.ban-luar.histori-data');
+                Route::post('/histori-destroy/{histori}', [App\Http\Controllers\BanController::class, 'histori_delete'])->name('statistik.ban-luar.histori-destroy');
+            });
         });
 
         Route::get('dokumen/template-new', [App\Http\Controllers\DokumenNewController::class, 'index'])->name('template-new');
