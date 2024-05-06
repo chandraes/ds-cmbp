@@ -376,6 +376,18 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('pritn-kas-per-vendor/{vendor}/{bulan}/{tahun}', [App\Http\Controllers\RekapController::class, 'print_kas_per_vendor'])->name('print-kas-per-vendor.index');
         Route::get('perform-unit-pervendor', [App\Http\Controllers\StatistikController::class, 'perform_unit_pervendor'])->name('perform-unit-pervendor.index');
         Route::get('statistik-pervendor', [App\Http\Controllers\StatistikController::class, 'statistik_pervendor'])->name('statistik-pervendor.index');
+
+        Route::prefix('per-vendor')->group(function(){
+            Route::get('/upah-gendong', [App\Http\Controllers\PerVendorController::class, 'upah_gendong'])->name('per-vendor.upah-gendong');
+
+            Route::prefix('ban-luar')->group(function(){
+                Route::get('/', [App\Http\Controllers\PerVendorController::class, 'ban_luar'])->name('per-vendor.ban-luar');
+                Route::post('/store', [App\Http\Controllers\PerVendorController::class, 'ban_luar_store'])->name('per-vendor.ban-luar.store');
+                Route::get('/{vehicle}/{posisi}/histori', [App\Http\Controllers\PerVendorController::class, 'ban_histori'])->name('per-vendor.ban-luar.histori');
+                Route::get('/histori-data', [App\Http\Controllers\PerVendorController::class, 'ban_histori_data'])->name('per-vendor.ban-luar.histori-data');
+                Route::post('/histori-destroy/{histori}', [App\Http\Controllers\PerVendorController::class, 'ban_histori_delete'])->name('per-vendor.ban-luar.histori-destroy');
+            });
+        });
     });
 
     Route::group(['middleware' => 'role:customer'], function() {
