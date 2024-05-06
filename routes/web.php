@@ -82,9 +82,19 @@ Route::group(['middleware' => ['auth']], function() {
             'index', 'store', 'update', 'destroy'
         ]);
 
-        Route::post('database/persentase-awal-store', [App\Http\Controllers\PersentaseAwalController::class, 'store'])->name('database.persentase-awal-store');
-        Route::patch('database/persentase-awal-update/{awal}', [App\Http\Controllers\PersentaseAwalController::class, 'update'])->name('database.persentase-awal-update');
-        Route::delete('database/persentase-awal-destroy/{awal}', [App\Http\Controllers\PersentaseAwalController::class, 'destroy'])->name('database.persentase-awal-destroy');
+        Route::prefix('database')->group(function(){
+            Route::post('/persentase-awal-store', [App\Http\Controllers\PersentaseAwalController::class, 'store'])->name('database.persentase-awal-store');
+            Route::patch('/persentase-awal-update/{awal}', [App\Http\Controllers\PersentaseAwalController::class, 'update'])->name('database.persentase-awal-update');
+            Route::delete('/persentase-awal-destroy/{awal}', [App\Http\Controllers\PersentaseAwalController::class, 'destroy'])->name('database.persentase-awal-destroy');
+
+            Route::prefix('upah-gendong')->group(function(){
+                Route::get('/', [App\Http\Controllers\DatabaseController::class, 'upah_gendong'])->name('database.upah-gendong');
+                Route::post('/store', [App\Http\Controllers\DatabaseController::class, 'upah_gendong_store'])->name('database.upah-gendong.store');
+                Route::patch('/update/{ug}', [App\Http\Controllers\DatabaseController::class, 'upah_gendong_update'])->name('database.upah-gendong.update');
+                Route::delete('/destroy/{ug}', [App\Http\Controllers\DatabaseController::class, 'upah_gendong_destroy'])->name('database.upah-gendong.destroy');
+             });
+        });
+
 
         Route::resource('pemegang-saham', App\Http\Controllers\PemegangSahamController::class);
 
@@ -332,18 +342,22 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('rekap/csr', [App\Http\Controllers\RekapController::class, 'rekap_csr'])->name('rekap.csr');
         Route::get('rekap/csr/{invoiceCsr}/detail', [App\Http\Controllers\RekapController::class, 'rekap_csr_detail'])->name('rekap.csr.detail');
 
-        Route::get('statistik/perform-unit', [App\Http\Controllers\StatistikController::class, 'perform_unit'])->name('statistik.perform-unit');
-        Route::get('statistik/perform-unit/print', [App\Http\Controllers\StatistikController::class, 'perform_unit_print'])->name('statistik.perform-unit.print');
-        Route::get('statistik/perform-unit-tahunan', [App\Http\Controllers\StatistikController::class, 'perform_unit_tahunan'])->name('statistik.perform-unit-tahunan');
-        Route::get('statistik/perform-unit-tahunan/print', [App\Http\Controllers\StatistikController::class, 'perform_unit_tahunan_print'])->name('statistik.perform-unit-tahunan.print');
+        Route::prefix('statistik')->group(function(){
+            Route::get('/perform-unit', [App\Http\Controllers\StatistikController::class, 'perform_unit'])->name('statistik.perform-unit');
+            Route::get('/perform-unit/print', [App\Http\Controllers\StatistikController::class, 'perform_unit_print'])->name('statistik.perform-unit.print');
+            Route::get('/perform-unit-tahunan', [App\Http\Controllers\StatistikController::class, 'perform_unit_tahunan'])->name('statistik.perform-unit-tahunan');
+            Route::get('/perform-unit-tahunan/print', [App\Http\Controllers\StatistikController::class, 'perform_unit_tahunan_print'])->name('statistik.perform-unit-tahunan.print');
 
-        Route::get('statistik/customer', [App\Http\Controllers\StatistikController::class, 'statistik_customer'])->name('statistik.customer');
+            Route::get('/customer', [App\Http\Controllers\StatistikController::class, 'statistik_customer'])->name('statistik.customer');
+            Route::get('/perform-vendor', [App\Http\Controllers\StatistikController::class, 'perform_vendor'])->name('statistik.perform-vendor');
 
+            Route::get('/upah-gendong', [App\Http\Controllers\StatistikController::class, 'upah_gendong'])->name('statistik.upah-gendong');
+        });
 
         Route::get('dokumen/template-new', [App\Http\Controllers\DokumenNewController::class, 'index'])->name('template-new');
         Route::get('dokumen/template-new/kontrak', [App\Http\Controllers\DokumenNewController::class, 'kontrak_new'])->name('template-new.kontrak');
         Route::post('dokumen/template-new/kontrak/create', [App\Http\Controllers\DokumenNewController::class, 'create_template_kontrak'])->name('template-new.kontrak.create');
-        Route::get('statistik/perform-vendor', [App\Http\Controllers\StatistikController::class, 'perform_vendor'])->name('statistik.perform-vendor');
+
 
     });
 
