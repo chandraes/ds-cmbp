@@ -42,7 +42,7 @@
         </div>
     </div>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-success shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-black" href="{{ url('/') }}"  style="background-color: white; padding: 5px">
                     <img src="{{asset('cmbp.png')}}" alt="cmbp" class="img-responsive" width="50">
