@@ -202,6 +202,8 @@ class FormKasUangJalanController extends Controller
                     "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n\n".
                     "*UJ".sprintf("%02d",$data['nomor_uang_jalan'])."*\n\n".
                     "Nomor Lambung : ".Vehicle::find($data['vehicle_id'])->nomor_lambung."\n".
+                    "Nopol : ".Vehicle::find($data['vehicle_id'])->nopol."\n\n".
+                    "Driver : ".Vehicle::find($data['vehicle_id'])->driver."\n".
                     "Vendor : ".$store->vendor->nama."\n\n".
                     "Customer : ".$store->customer->singkatan."\n".
                     "Rute : ".$store->rute->nama."\n\n".
