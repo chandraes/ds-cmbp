@@ -9,8 +9,8 @@
     {{-- if session has success, trigger sweet alert --}}
     @include('swal')
     <div class="row justify-content-left">
-        <h2>KAS BESAR</h2>
-        <div class="col-md-3 text-center mt-5">
+        <h4 class="mt-3">UMUM</h4>
+        <div class="col-md-2 text-center mt-5">
             <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
             <div class="modal fade" id="formKasBesar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -33,152 +33,21 @@
                 </div>
             </div>
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formKasBesar">
-                <img src="{{asset('images/kas-besar.svg')}}" alt="" width="100">
-                <h2>FORM DEPOSIT</h2>
+                <img src="{{asset('images/form-deposit.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM DEPOSIT</h4>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
-            <!-- Modal trigger button -->
-            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formKasKecil">
-                <img src="{{asset('images/kas-kecil.svg')}}" alt="" width="100">
-                <h2>FORM KAS KECIL</h2>
-            </a>
-            <!-- Modal Body -->
-            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-            <div class="modal fade" id="formKasKecil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="mb-3 mt-3">
-                                <select class="form-select form-select-lg" name="" id="tipeKasKecil">
-                                    <option value="masuk">Permintaan Dana Kas Kecil</option>
-                                    <option value="keluar">Pengeluaran Dana Kas Kecil</option>
-                                    <option value="void">Void Dana Kas Kecil</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <a href="#" class="btn btn-primary" onclick="tipeFormKasKecil()">Lanjutkan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 text-center mt-5">
+
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('billing.deviden.index')}}" class="text-decoration-none">
-                <img src="{{asset('images/dividen.svg')}}" alt="" width="100">
-                <h2>FORM DEVIDEN</h2>
+                <img src="{{asset('images/dividen.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM DEVIDEN</h4>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
-            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formVendor">
-                <img src="{{asset('images/form-vendor.svg')}}" alt="" width="100">
-                <h2>FORM VENDOR</h2>
-            </a>
-
-        </div>
-        <div class="modal fade" id="formVendor" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="mb-3 mt-3">
-                            <select class="form-select form-select-lg" name="" id="vendorSelect">
-                                <option value="titipan">Titipan Vendor</option>
-                                <option value="pelunasan">Pelunasan Tagihan</option>
-                                <option value="bayar">Bayar dari Vendor</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <a href="#" class="btn btn-primary" onclick="tipeformVendor()">Lanjutkan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <hr>
-    <br>
-    <div class="row justify-content-left">
-        <h2>TRANSAKSI</h2>
-        <div class="col-md-3 text-center mt-5">
-            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#uangJalan">
-                <img src="{{asset('images/uang-jalan.svg')}}" alt="" width="100">
-                <h2>FORM KAS UANG JALAN</h2>
-            </a>
-            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-            <div class="modal fade" id="uangJalan" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="mb-3 mt-3">
-                                <select class="form-select form-select-lg" name="" id="tipeKasUangJalan">
-                                    <option value="masuk">Permintaan Kas Uang Jalan</option>
-                                    <option value="keluar">Pengeluaran Uang Jalan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <a href="#" class="btn btn-primary" onclick="tipeFormKasUangJalan()">Lanjutkan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('billing.transaksi.index')}}" class="text-decoration-none">
-                <img src="{{asset('images/transaction.svg')}}" alt="" width="100">
-                <h2>FORM TRANSAKSI</h2>
-            </a>
-        </div>
-        {{-- <div class="col-md-3 text-center mt-5">
-            <a href="{{route('billing.storing.index')}}" class="text-decoration-none">
-                <img src="{{asset('images/storing.svg')}}" alt="" width="100">
-                <h2>FORM STORING BBM</h2>
-            </a>
-        </div> --}}
-        {{-- <div class="col-md-3 text-center mt-5">
-            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formBarang">
-                <img src="{{asset('images/barang.svg')}}" alt="" width="100">
-                <h2>FORM BARANG</h2>
-            </a>
-            <div class="modal fade" id="formBarang" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                role="dialog" aria-labelledby="fllTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="fllTitle">Form Barang</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <select class="form-select form-select-lg" name="" id="formBarangSelect">
-                                <option value="masuk">Beli</option>
-                                <option value="keluar">Jual</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="button" class="btn btn-primary" onclick="tipeFormBarang()">Lanjutkan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-    </div>
-    <hr>
-    <br>
-    <div class="row justify-content-left">
-        <h2>STAFF</h2>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#direksiStaff">
-                <img src="{{asset('images/kasbon.svg')}}" alt="" width="100">
-                <h2>FORM KASBON</h2>
+                <img src="{{asset('images/kasbon.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM KASBON</h4>
             </a>
             <div class="modal fade" id="direksiStaff" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 role="dialog" aria-labelledby="direksiStafftitle" aria-hidden="true">
@@ -202,17 +71,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('billing.gaji.index')}}" class="text-decoration-none">
-                <img src="{{asset('images/gaji.svg')}}" alt="" width="100">
-                <h2>FORM GAJI</h2>
-            </a>
-        </div>
         @if (auth()->user()->role === 'admin')
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formLain">
-                <img src="{{asset('images/lain.svg')}}" alt="" width="100">
-                <h2>FORM LAIN-LAIN</h2>
+                <img src="{{asset('images/form-lain.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM LAIN-LAIN</h4>
             </a>
             <div class="modal fade" id="formLain" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 role="dialog" aria-labelledby="fllTitle" aria-hidden="true">
@@ -238,14 +101,198 @@
             </div>
         </div>
         @endif
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM GANTI RUGI</h4>
+            </a>
+        </div>
 
-        <div class="col-md-3 text-center mt-5">
+        <div class="modal fade" id="formVendor" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="mb-3 mt-3">
+                            <select class="form-select form-select-lg" name="" id="vendorSelect">
+                                <option value="titipan">Titipan Vendor</option>
+                                <option value="pelunasan">Pelunasan Tagihan</option>
+                                <option value="bayar">Bayar dari Vendor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <a href="#" class="btn btn-primary" onclick="tipeformVendor()">Lanjutkan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h4 class="mt-3">COST OPERATIONAL</h4>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM OPERATIONAL</h4>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <!-- Modal trigger button -->
+            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formKasKecil">
+                <img src="{{asset('images/kas-kecil.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM KAS KECIL</h4>
+            </a>
+            <!-- Modal Body -->
+            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+            <div class="modal fade" id="formKasKecil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="mb-3 mt-3">
+                                <select class="form-select form-select-lg" name="" id="tipeKasKecil">
+                                    <option value="masuk">Permintaan Dana Kas Kecil</option>
+                                    <option value="keluar">Pengeluaran Dana Kas Kecil</option>
+                                    <option value="void">Void Dana Kas Kecil</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <a href="#" class="btn btn-primary" onclick="tipeFormKasKecil()">Lanjutkan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="{{route('billing.gaji.index')}}" class="text-decoration-none">
+                <img src="{{asset('images/gaji.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM GAJI</h4>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM BUNGA INVESTOR</h4>
+            </a>
+        </div>
+
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h4 class="mt-3">KHUSUS</h4>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM BARANG UMUM</h4>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM BARANG MAINTENANCE</h4>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM BBM STORING</h4>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formVendor">
+                <img src="{{asset('images/form-vendor.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM VENDOR</h4>
+            </a>
+        </div>
+
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h4 class="mt-3">TRANSAKSI</h4>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#uangJalan">
+                <img src="{{asset('images/uang-jalan.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM KAS UANG JALAN</h4>
+            </a>
+            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+            <div class="modal fade" id="uangJalan" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="mb-3 mt-3">
+                                <select class="form-select form-select-lg" name="" id="tipeKasUangJalan">
+                                    <option value="masuk">Permintaan Kas Uang Jalan</option>
+                                    <option value="keluar">Pengeluaran Uang Jalan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <a href="#" class="btn btn-primary" onclick="tipeFormKasUangJalan()">Lanjutkan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="{{route('billing.transaksi.index')}}" class="text-decoration-none">
+                <img src="{{asset('images/transaction.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM TRANSAKSI</h4>
+            </a>
+        </div>
+        {{-- <div class="col-md-2 text-center mt-5">
+            <a href="{{route('billing.storing.index')}}" class="text-decoration-none">
+                <img src="{{asset('images/storing.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM STORING BBM</h4>
+            </a>
+        </div> --}}
+        {{-- <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#formBarang">
+                <img src="{{asset('images/barang.svg')}}" alt="" width="70">
+                <h4 class="mt-3">FORM BARANG</h4>
+            </a>
+            <div class="modal fade" id="formBarang" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="fllTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered " role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fllTitle">Form Barang</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <select class="form-select form-select-lg" name="" id="formBarangSelect">
+                                <option value="masuk">Beli</option>
+                                <option value="keluar">Jual</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-primary" onclick="tipeFormBarang()">Lanjutkan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('home')}}" class="text-decoration-none">
-                <img src="{{asset('images/dashboard.svg')}}" alt="" width="100">
-                <h2>Dashboard</h2>
+                <img src="{{asset('images/dashboard.svg')}}" alt="" width="70">
+                <h4 class="mt-3">Dashboard</h4>
             </a>
         </div>
     </div>
+    <hr>
+    <br>
+    
 
 </div>
 @endsection
@@ -294,7 +341,7 @@
             }
         }
 
-       
+
 
         function tipeformVendor()
         {
