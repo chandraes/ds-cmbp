@@ -8,31 +8,137 @@
     </div>
     @include('swal')
     <div class="row justify-content-left">
-        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'user')
-        <h2>KAS</h2>
+        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'user' || auth()->user()->role === 'su')
+        <h2 class="mt-3">UMUM</h2>
         <hr>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('rekap.kas-besar')}}" class="text-decoration-none">
-                <img src="{{asset('images/rekap-besar.svg')}}" alt="" width="100">
-                <h2>Kas Besar</h2>
+                <img src="{{asset('images/rekap-besar.svg')}}" alt="" width="70">
+                <h5 class="mt-3">KAS BESAR</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
+            <a href="{{route('rekap.nota-void')}}" class="text-decoration-none">
+                <img src="{{asset('images/void.svg')}}" alt="" width="70">
+                <h5 class="mt-3">NOTA VOID TRANSAKSI</h5>
+            </a>
+        </div>
+    </div>
+        <div class="row justify-content-left">
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none">
+                    <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">DEPOSIT</h5>
+                </a>
+            </div>
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none">
+                    <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">DIVIDEN</h5>
+                </a>
+            </div>
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalKasbon">
+                    <img src="{{asset('images/kasbon.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">KASBON</h5>
+                </a>
+                <div class="modal fade" id="modalKasbon" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="direksiStafftitle">Pilih Jenis Rekap Kasbon</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <select class="form-select form-select-lg" name="" id="kasbonSelect">
+                                    <option value="direksi">Direksi</option>
+                                    <option value="staff">Staff</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-primary" onclick="tipeFormKasBon()">Lanjutkan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none">
+                    <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">LAIN-LAIN</h5>
+                </a>
+            </div>
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none">
+                    <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">GANTI RUGI</h5>
+                </a>
+            </div>
+            <div class="col-md-2 text-center mt-5">
+                <a href="#" class="text-decoration-none">
+                    <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                    <h5 class="mt-3">CSR<br>(TIDAK TERTENTU)</h5>
+                </a>
+            </div>
+
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h2 class="mt-3">COST OPERATIONAL</h2>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">OPERATIONAL</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('rekap.kas-kecil')}}" class="text-decoration-none">
-                <img src="{{asset('images/kas-kecil.svg')}}" alt="" width="100">
-                <h2>Kas Kecil</h2>
+                <img src="{{asset('images/kas-kecil.svg')}}" alt="" width="70">
+                <h5 class="mt-3">KAS KECIL</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('rekap.kas-uang-jalan')}}" class="text-decoration-none">
-                <img src="{{asset('images/uang-jalan.svg')}}" alt="" width="100">
-                <h2>Kas Uang Jalan</h2>
+        <div class="col-md-2 text-center mt-5">
+            <a href="{{route('rekap-gaji')}}" class="text-decoration-none">
+                <img src="{{asset('images/gaji.svg')}}" alt="" width="70">
+                <h5 class="mt-3">GAJI</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">BUNGA INVESTOR</h5>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h2 class="mt-3">KHUSUS</h2>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">BARANG UMUM</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">BARANG MAINTENANCE</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">STORING BBM</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
             <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#vendorModal">
-                <img src="{{asset('images/kas-vendor.svg')}}" alt="" width="100">
-                <h2>Kas Vendor</h2>
+                <img src="{{asset('images/form-vendor.svg')}}" alt="" width="70">
+                <h5 class="mt-3">VENDOR</h5>
             </a>
 
             <div class="modal fade" id="vendorModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -64,96 +170,65 @@
             </div>
         </div>
     </div>
-    <br>
+    <hr>
     <br>
     <div class="row justify-content-left">
-        <h2>NOTA LUNAS</h2>
-        <hr>
-        <div class="col-md-3 text-center mt-5">
+        <h2 class="mt-3">TRANSAKSI</h2>
+        <div class="col-md-2 text-center mt-5">
+            <a href="{{route('rekap.kas-uang-jalan')}}" class="text-decoration-none">
+                <img src="{{asset('images/uang-jalan.svg')}}" alt="" width="70">
+                <h5 class="mt-3">KAS UANG JALAN</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">NOTA MUAT</h5>
+            </a>
+        </div>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">NOTA BONGKAR</h5>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row justify-content-left">
+        <h2 class="mt-3">INVOICE</h2>
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('rekap.nota-lunas')}}" class="text-decoration-none">
-                <img src="{{asset('images/nota-lunas.svg')}}" alt="" width="100">
-                <h2>Customer</h2>
+                <img src="{{asset('images/invoice-tagihan.svg')}}" alt="" width="70">
+                <h5 class="mt-3">INVOICE CUSTOMER</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('rekap-gaji')}}" class="text-decoration-none">
-                <img src="{{asset('images/rekap-gaji.svg')}}" alt="" width="100">
-                <h2>Gaji Karyawan</h2>
+        <div class="col-md-2 text-center mt-5">
+            <a href="#" class="text-decoration-none">
+                <img src="{{asset('images/kosong.svg')}}" alt="" width="70">
+                <h5 class="mt-3">INVOICE BAYAR VENDOR</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('rekap.bonus')}}" class="text-decoration-none">
-                <img src="{{asset('images/rekap-bonus.svg')}}" alt="" width="100">
-                <h2>Bonus Sponsor</h2>
+                <img src="{{asset('images/invoice-bonus.svg')}}" alt="" width="70">
+                <h5 class="mt-3">INVOICE BONUS SPONSOR</h5>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('rekap.csr')}}" class="text-decoration-none">
-                <img src="{{asset('images/rekap-csr.svg')}}" alt="" width="100">
-                <h2>CSR</h2>
+                <img src="{{asset('images/invoice-csr.svg')}}" alt="" width="70">
+                <h5 class="mt-3">INVOICE CSR<br>(TERTENTU)</h5>
             </a>
         </div>
-    </div>
-    <br>
-    <br>
-    <div class="row justify-content-left">
-        <h2>OTHERS</h2>
-        <hr>
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('rekap.nota-void')}}" class="text-decoration-none">
-                <img src="{{asset('images/void.svg')}}" alt="" width="100">
-                <h2>Nota Void Transaksi</h2>
-            </a>
-        </div>
-        {{-- <div class="col-md-3 text-center mt-5">
-            <a href="{{route('rekap.stock-barang')}}" class="text-decoration-none">
-                <img src="{{asset('images/stock.svg')}}" alt="" width="100">
-                <h2>Stock Barang</h2>
-            </a>
-        </div> --}}
-
-
-        <div class="col-md-3 text-center mt-5">
-            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalKasbon">
-                <img src="{{asset('images/rekap-kasbon.svg')}}" alt="" width="100">
-                <h2>Kasbon Karyawan</h2>
-            </a>
-            <div class="modal fade" id="modalKasbon" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="direksiStafftitle">Pilih Jenis Rekap Kasbon</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <select class="form-select form-select-lg" name="" id="kasbonSelect">
-                                <option value="direksi">Direksi</option>
-                                <option value="staff">Staff</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="button" class="btn btn-primary" onclick="tipeFormKasBon()">Lanjutkan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        <div class="col-md-3 text-center mt-5">
-            <a href="{{route('statisik.index')}}" class="text-decoration-none">
-                <img src="{{asset('images/statistik.svg')}}" alt="" width="100">
-                <h2>Statistik</h2>
-            </a>
-        </div>
-        <div class="col-md-3 text-center mt-5">
+        <div class="col-md-2 text-center mt-5">
             <a href="{{route('home')}}" class="text-decoration-none">
-                <img src="{{asset('images/dashboard.svg')}}" alt="" width="100">
-                <h2>Dashboard</h2>
+                <img src="{{asset('images/dashboard.svg')}}" alt="" width="70">
+                <h5 class="mt-3">DASHBOARD</h5>
             </a>
         </div>
     </div>
+    @endif
 </div>
 @endsection
 @push('css')
@@ -168,6 +243,11 @@
         $('#vendor').select2({
             theme: 'bootstrap-5',
             placeholder: '-- Pilih Vendor --'
+        });
+
+        $('#vehicle_id').select2({
+            theme: 'bootstrap-5',
+            placeholder: '-- Pilih Nomor Lambung --'
         });
     });
 

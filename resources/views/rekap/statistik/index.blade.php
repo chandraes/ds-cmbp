@@ -127,12 +127,12 @@
                 <h4>STATISTIK CUSTOMER</h4>
             </a>
         </div>
-        <div class="col-md-3 text-center mt-5">
+        {{-- <div class="col-md-3 text-center mt-5">
             <a href="{{route('rekap.index')}}" class="text-decoration-none">
                 <img src="{{asset('images/back.svg')}}" alt="" width="80">
                 <h4>KEMBALI</h4>
             </a>
-        </div>
+        </div> --}}
         <div class="col-md-3 text-center mt-5">
             <a href="{{route('home')}}" class="text-decoration-none">
                 <img src="{{asset('images/dashboard.svg')}}" alt="" width="80">
