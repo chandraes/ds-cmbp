@@ -155,7 +155,9 @@
                     {{-- latest saldo --}}
                     <td class="text-center align-middle">
                         <strong>
-                            {{$data->last() ? number_format($data->last()->saldo, 0, ',', '.') : ''}}
+                            {{number_format($data->where('jenis_transaksi_id',
+                            1)->sum('nominal_transaksi') - $data->where('jenis_transaksi_id',
+                            2)->sum('nominal_transaksi') + ($dataSebelumnya ? $dataSebelumnya->saldo : 0), 0,',','.')}}
                         </strong>
                     </td>
                     <td></td>
