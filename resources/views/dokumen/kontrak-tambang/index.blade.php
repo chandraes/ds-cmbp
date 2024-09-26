@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12 text-center">
-            <h1><u>KONTRAK TAMBANG</u></h1>
+            <h1><u>KONTRAK KONSUMEN</u></h1>
         </div>
     </div>
     @include('swal')
@@ -23,7 +23,7 @@
                                 Dokumen</a>
                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#modalCreate"><img
                                 src="{{asset('images/kontrak-tambang.svg')}}" alt="add-document" width="30"> Tambah
-                            Kontrak Tambang</a>
+                            Kontrak Konsumen</a>
                     </td>
                 </tr>
             </table>
