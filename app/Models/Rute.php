@@ -17,6 +17,10 @@ class Rute extends Model
         'edited_by',
     ];
 
+    protected $appends = [
+        'nf_uang_jalan',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,6 +41,12 @@ class Rute extends Model
     {
         return $this->hasMany(VendorUangJalan::class);
     }
+
+    public function getNfUangJalanAttribute()
+    {
+        return number_format($this->uang_jalan, 0, ',', '.');
+    }
+
 
 
 }

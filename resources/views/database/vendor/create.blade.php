@@ -102,13 +102,16 @@
             <h3>
                 Informasi PPN & PPh
             </h3>
-            <div class="row mt-3 mb-3">
+             <div class="row mt-3 mb-3">
                 <div class="btn-group mb-3" role="group" data-bs-toggle="buttons">
                     {{-- <label class="btn btn-warning active">
                         <input type="checkbox" class="me-2" name="support_operational" id="support_operational" autocomplete="off"> Support Operational
                     </label> --}}
                     <label class="btn btn-warning active">
-                        <input type="checkbox" class="me-2" name="ppn" id="ppn" autocomplete="off" > PPN & PPh
+                        <input type="checkbox" class="me-2" name="ppn" id="ppn" autocomplete="off" > PPN
+                    </label>
+                    <label class="btn btn-warning">
+                        <input type="checkbox" class="me-2" name="ppn" id="pph" autocomplete="off" > Pph
                     </label>
                 </div>
             </div>
