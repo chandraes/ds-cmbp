@@ -85,6 +85,7 @@
             <thead class=" table-success">
             <tr>
                 <th class="text-center align-middle">Tanggal</th>
+                <th class="text-center align-middle">Uraian</th>
                 <th class="text-center align-middle">Nama Vendor</th>
                 <th class="text-center align-middle">Nomor Lambung</th>
                 <th class="text-center align-middle">Kas Uang Jalan</th>
@@ -99,7 +100,7 @@
                 <th class="text-center align-middle">Bank</th>
             </tr>
             <tr class="table-warning">
-                <td class="text-center align-middle" colspan="3">Saldo Bulan
+                <td class="text-center align-middle" colspan="4">Saldo Bulan
                     {{$stringBulan}} {{$tahunSebelumnya}}</td>
                 <td></td>
                 <td></td>
@@ -118,6 +119,7 @@
                 @foreach ($data as $d)
                 <tr>
                     <td class="text-center align-middle">{{$d->tanggal}}</td>
+                    <td class="text-start align-middle">{{$d->uraian}}</td>
                     <td class="text-center align-middle">{{$d->vendor ? $d->vendor->nickname : ''}}</td>
                     <td class="text-center align-middle">{{$d->vehicle ? $d->vehicle->nomor_lambung : ''}}</td>
                     <td class="text-center align-middle">{{$d->nomor_kode_kas_uang_jalan ?
@@ -152,11 +154,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-center align-middle"><strong>GRAND TOTAL</strong></td>
+                    <td colspan="5" class="text-center align-middle"><strong>GRAND TOTAL</strong></td>
                     <td></td>
                     <td></td>
                     <td class="text-center align-middle"><strong>{{number_format($data->where('jenis_transaksi_id',
