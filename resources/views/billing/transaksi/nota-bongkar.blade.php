@@ -24,8 +24,8 @@
                 <tr class="text-center">
                     <td><a href="{{route('home')}}"><img src="{{asset('images/dashboard.svg')}}" alt="dashboard"
                                 width="30"> Dashboard</a></td>
-                    <td><a href="{{route('billing.transaksi.index')}}"><img src="{{asset('images/transaction.svg')}}"
-                                alt="dokumen" width="30"> Form Transaksi</a></td>
+                    <td><a href="{{route('billing.index')}}"><img src="{{asset('images/billing.svg')}}"
+                                alt="dokumen" width="30"> Billing</a></td>
                 </tr>
             </table>
         </div>
@@ -42,6 +42,7 @@
                 <th class="text-center align-middle">Vendor</th>
                 <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Rute</th>
+                <th class="text-center align-middle">Uang Jalan</th>
                 <th class="text-center align-middle">Tanggal Muat</th>
                 <th class="text-center align-middle">Nota Muat</th>
                 <th class="text-center align-middle">Timbangan Muat</th>
@@ -49,6 +50,9 @@
             </tr>
         </thead>
         <tbody>
+            @php
+            $total = 0;
+            @endphp
             @foreach ($data as $d)
             <tr>
                 <td class="text-center align-middle">{{$loop->iteration}}</td>
@@ -164,6 +168,11 @@
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vendor->nickname}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->customer->singkatan}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->rute->nama}}</td>
+                <td class="text-center align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi,0,',','.')}}
+                    @php
+                    $total += $d->kas_uang_jalan->nominal_transaksi;
+                    @endphp
+                </td>
                 <td class="text-center align-middle">{{$d->id_tanggal_muat}}</td>
                 <td class="text-center align-middle">{{$d->nota_muat}}</td>
                 <td class="text-center align-middle">{{$d->tonase}}</td>
@@ -252,6 +261,13 @@
               });
             </script>
             @endforeach
+        </tbody>
+        <tbody>
+            <tr>
+                <th colspan="7" class="text-end align-middle">Total</th>
+                <th class="text-end align-middle">{{number_format($total,0,',','.')}}</th>
+                <th colspan="4" class="text-center align-middle"></th>
+            </tr>
         </tbody>
     </table>
 </div>
