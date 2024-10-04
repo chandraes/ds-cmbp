@@ -168,7 +168,7 @@
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vendor->nickname}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->customer->singkatan}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->rute->nama}}</td>
-                <td class="text-center align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi,0,',','.')}}
+                <td class="text-end align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi,0,',','.')}}
                     @php
                     $total += $d->kas_uang_jalan->nominal_transaksi;
                     @endphp
