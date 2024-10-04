@@ -107,7 +107,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="text-center align-middle">Rp. {{$dataSebelumnya ? number_format($dataSebelumnya->saldo,
+                <td class="text-end align-middle">Rp. {{$dataSebelumnya ? number_format($dataSebelumnya->saldo,
                     0, ',','.') : ''}}</td>
                 <td></td>
                 <td></td>
