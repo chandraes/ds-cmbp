@@ -224,4 +224,33 @@ class FormKasUangJalanController extends Controller
 
 
     }
+
+    public function pengembalian()
+    {
+        $db = new KasUangJalan();
+        $saldo = $db->saldoTerakhir();
+        $rekening = Rekening::where('untuk', 'kas-besar')->first();
+
+        return view('billing.kas-uang-jalan.pengembalian', [
+            'saldo' => $saldo,
+            'rekening' => $rekening,
+        ]);
+    }
+
+    public function pengembalian_store(Request $request)
+    {
+        $data = $request->validate([
+            'nominal_transaksi' => 'required',
+        ]);
+
+        $db = new KasUangJalan();
+
+        $req = $db->pengembalian($data);
+
+        if($req['status'] == 'error'){
+            return redirect()->back()->with('error', $req['message']);
+        }
+
+        return redirect()->route('billing.index')->with($req['status'], $req['message']);
+    }
 }

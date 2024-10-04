@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\StarSender;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +12,64 @@ class KasBesar extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $appends = ['nf_nominal_transaksi', 'nf_saldo', 'nf_modal_investor_terakhir'];
+
     public function lastKasBesar()
     {
-        return $this->latest()->orderBy('id', 'desc')->first();
+        return $this->orderBy('id', 'desc')->first();
     }
+
+    public function kasBesarByMonth($month, $year)
+    {
+        $data = $this->whereMonth('tanggal', $month)
+                    ->whereYear('tanggal', $year)
+                    ->orderBy('id', 'desc')
+                    ->first();
+
+        if (!$data) {
+        $data = $this->where('tanggal', '<', Carbon::create($year, $month, 1))
+                ->orderBy('id', 'desc')
+                ->first();
+        }
+
+        return $data;
+    }
+
+    public function kasBesar($month, $year)
+    {
+        return $this->whereMonth('tanggal', $month)->whereYear('tanggal', $year)->get();
+    }
+
+    public function saldoTerakhir()
+    {
+        return $this->orderBy('id', 'desc')->first()->saldo ?? 0;
+    }
+
+    public function dataTahun()
+    {
+        return $this->selectRaw('YEAR(tanggal) as tahun')->groupBy('tahun')->get();
+    }
+
+    public function modalInvestorTerakhir()
+    {
+        return $this->orderBy('id', 'desc')->first()->modal_investor_terakhir ?? 0;
+    }
+
+    public function getNfNominalTransaksiAttribute()
+    {
+        return number_format($this->nominal_transaksi, 0, ',', '.');
+    }
+
+    public function getNfSaldoAttribute()
+    {
+        return number_format($this->saldo, 0, ',', '.');
+    }
+
+    public function getNfModalInvestorTerakhirAttribute()
+    {
+        return number_format($this->modal_investor_terakhir, 0, ',', '.');
+    }
+
 
     public function jenis_transaksi()
     {
@@ -54,5 +110,21 @@ class KasBesar extends Model
 
     }
 
+    public function sendWa($tujuan, $pesan)
+    {
+        $storeWa = PesanWa::create([
+            'pesan' => $pesan,
+            'tujuan' => $tujuan,
+            'status' => 0,
+        ]);
+
+        $send = new StarSender($tujuan, $pesan);
+        $res = $send->sendGroup();
+
+        if ($res == 'true') {
+            $storeWa->update(['status' => 1]);
+        }
+
+    }
 
 }

@@ -238,6 +238,7 @@
                                 <select class="form-select form-select-lg" name="" id="tipeKasUangJalan">
                                     <option value="masuk">Permintaan Kas Uang Jalan</option>
                                     <option value="keluar">Pengeluaran Uang Jalan</option>
+                                    <option value="pengembalian">Pengembalian Kas Uang Jalan</option>
                                 </select>
                             </div>
                         </div>
@@ -523,6 +524,8 @@
                 window.location.href = "{{route('kas-uang-jalan.masuk')}}";
             } else if (val === 'keluar') {
                 window.location.href = "{{route('kas-uang-jalan.keluar')}}";
+            } else if (val === 'pengembalian') {
+                window.location.href = "{{route('kas-uang-jalan.pengembalian')}}";
             }
         }
 
