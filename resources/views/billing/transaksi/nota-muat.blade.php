@@ -47,6 +47,9 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $totalUangJalan = 0;
+            @endphp
             @foreach ($data as $d)
             <tr>
                 <td class="text-center align-middle">{{$loop->iteration}}</td>
@@ -144,7 +147,11 @@
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vehicle->nomor_lambung}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vendor->nickname}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->rute->nama}}</td>
-                <td class="text-end align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi, 0, ',','.')}}</td>
+                <td class="text-end align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi, 0, ',','.')}}
+                    @php
+                        $totalUangJalan += $d->kas_uang_jalan->nominal_transaksi;
+                    @endphp
+                </td>
                 <td class="text-center align-middle">
                     @if (auth()->user()->role === 'admin')
                     <button class="btn btn-warning btn-block" type="button" data-bs-toggle="modal" data-bs-target="#modalVoid-{{$d->id}}">Void</button>
@@ -202,6 +209,13 @@
             </script>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-end align-middle" colspan="6">Grand Total</th>
+                <th class="text-end align-middle">{{number_format($totalUangJalan, 0, ',','.')}}</th>
+                <th class="text-end align-middle"></th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 @endsection

@@ -34,6 +34,9 @@ class FormDevidenController extends Controller
         $dbKasBesar = new KasBesar();
         $dbKasUJ = new KasUangJalan();
 
+        $saldoKasBesar = $dbKasBesar->saldoTerakhir();
+        $saldoKasUJ = $dbKasUJ->saldoTerakhir();
+
         return view('billing.deviden.index', [
             'persen' => $persen,
             'data' => $pemegangSaham
