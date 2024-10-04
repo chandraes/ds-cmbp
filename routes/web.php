@@ -351,6 +351,11 @@ Route::group(['middleware' => ['auth']], function() {
                 Route::get('/', [App\Http\Controllers\FormKasUangJalanController::class, 'pengembalian'])->name('kas-uang-jalan.pengembalian');
                 Route::post('/store', [App\Http\Controllers\FormKasUangJalanController::class, 'pengembalian_store'])->name('kas-uang-jalan.pengembalian.store');
             });
+
+            Route::prefix('penyesuaian')->group(function(){
+                Route::get('/', [App\Http\Controllers\FormKasUangJalanController::class, 'penyesuaian'])->name('kas-uang-jalan.penyesuaian');
+                Route::post('/store', [App\Http\Controllers\FormKasUangJalanController::class, 'penyesuaian_store'])->name('kas-uang-jalan.penyesuaian.store');
+            });
         });
 
         // Form Barang

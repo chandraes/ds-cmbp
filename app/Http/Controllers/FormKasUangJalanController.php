@@ -9,6 +9,7 @@ use App\Models\GroupWa;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Customer;
+use App\Models\Pengaturan;
 use App\Models\VendorUangJalan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
@@ -248,7 +249,37 @@ class FormKasUangJalanController extends Controller
         $req = $db->pengembalian($data);
 
         if($req['status'] == 'error'){
-            return redirect()->back()->with('error', $req['message']);
+            return redirect()->back()->withInput()->with('error', $req['message']);
+        }
+
+        return redirect()->route('billing.index')->with($req['status'], $req['message']);
+    }
+
+    public function penyesuaian()
+    {
+        $rekening = Rekening::where('untuk', 'kas-uang-jalan')->first();
+        $batasan = Pengaturan::where('untuk', 'kas-uang-jalan')->first()->nilai;
+
+        return view('billing.kas-uang-jalan.penyesuaian', [
+            'rekening' => $rekening,
+            'batasan' => $batasan,
+        ]);
+    }
+
+    public function penyesuaian_store(Request $request)
+    {
+        $data = $request->validate([
+            'uraian' => 'required',
+            'nominal_transaksi' => 'required',
+            'tipe' => 'required',
+        ]);
+
+        $db = new KasUangJalan();
+
+        $req = $db->penyesuaian($data);
+
+        if($req['status'] == 'error'){
+            return redirect()->back()->withInput()->with('error', $req['message']);
         }
 
         return redirect()->route('billing.index')->with($req['status'], $req['message']);

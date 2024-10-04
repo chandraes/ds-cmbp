@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\StarSender;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -171,5 +172,83 @@ class KasUangJalan extends Model
             DB::rollBack();
             return ['status' => 'error', 'message' => $th->getMessage()];
         }
+    }
+
+    public function penyesuaian($data)
+    {
+        $data['tanggal'] = date('Y-m-d');
+        $data['nominal_transaksi'] = str_replace('.', '', $data['nominal_transaksi']);
+
+        $saldoUangJalan = $this->saldoTerakhir();
+
+        if ($data['tipe'] == 0 && $saldoUangJalan < $data['nominal_transaksi']) {
+            return ['status' => 'error', 'message' => 'Saldo tidak mencukupi. Saldo saat ini : '.number_format($saldoUangJalan, 0, ',', '.')];
+        }
+
+        $rekening = Rekening::where('untuk', 'kas-uang-jalan')->first();
+
+        try {
+            DB::beginTransaction();
+
+            $jenisTransaksiId = $data['tipe'] == 0 ? 2 : 1;
+            $saldo = $data['tipe'] == 0 ? $saldoUangJalan - $data['nominal_transaksi'] : $saldoUangJalan + $data['nominal_transaksi'];
+            $icon = $data['tipe'] == 0 ? '🔴' : '🔵';
+
+            $store = $this->create([
+                'tanggal' => $data['tanggal'],
+                'nominal_transaksi' => $data['nominal_transaksi'],
+                'uraian' => $data['uraian'],
+                'jenis_transaksi_id' => $jenisTransaksiId,
+                'saldo' => $saldo,
+                'transfer_ke' => $rekening->nama_rekening,
+                'bank' => $rekening->nama_bank,
+                'no_rekening' => $rekening->nomor_rekening,
+            ]);
+
+            $pesan =    str_repeat($icon, 9)."\n".
+                        "*Form Penyesuaian Kas Uang Jalan*\n".
+                        str_repeat($icon, 9)."\n\n".
+                        "Uraian : ".$store->uraian."\n".
+                        "Nilai :  *Rp. ".number_format($store->nominal_transaksi, 0, ',', '.')."*\n\n".
+                        "Ditransfer ke rek:\n\n".
+                        "Bank      : ".$store->bank."\n".
+                        "Nama    : ".$store->transfer_ke."\n".
+                        "No. Rek : ".$store->no_rekening."\n\n".
+                        "==========================\n".
+                        "Sisa Saldo Kas Uang Jalan : \n".
+                        "Rp. ".number_format($store->saldo, 0, ',', '.')."\n\n".
+                        "Terima kasih 🙏🙏🙏\n";
+
+            DB::commit();
+
+            $tujuan = GroupWa::where('untuk', 'kas-uang-jalan')->first()->nama_group;
+
+            $this->sendWa($tujuan, $pesan);
+
+            return ['status' => 'success', 'message' => 'Penyesuaian Dana berhasil'];
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $th->getMessage()];
+        }
+
+    }
+
+    public function sendWa($tujuan, $pesan)
+    {
+        $storeWa = PesanWa::create([
+            'pesan' => $pesan,
+            'tujuan' => $tujuan,
+            'status' => 0,
+        ]);
+
+        $send = new StarSender($tujuan, $pesan);
+        $res = $send->sendGroup();
+
+        if ($res == 'true') {
+            $storeWa->update(['status' => 1]);
+        }
+
     }
 }

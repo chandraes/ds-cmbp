@@ -239,6 +239,7 @@
                                     <option value="masuk">Permintaan Kas Uang Jalan</option>
                                     <option value="keluar">Pengeluaran Uang Jalan</option>
                                     <option value="pengembalian">Pengembalian Kas Uang Jalan</option>
+                                    <option value="penyesuaian">Penyesuaian Kas Uang Jalan</option>
                                 </select>
                             </div>
                         </div>
@@ -526,6 +527,8 @@
                 window.location.href = "{{route('kas-uang-jalan.keluar')}}";
             } else if (val === 'pengembalian') {
                 window.location.href = "{{route('kas-uang-jalan.pengembalian')}}";
+            }  else if (val === 'penyesuaian') {
+                window.location.href = "{{route('kas-uang-jalan.penyesuaian')}}";
             }
         }
 
