@@ -42,6 +42,7 @@
                 <th class="text-center align-middle">Nomor Lambung</th>
                 <th class="text-center align-middle">Vendor</th>
                 <th class="text-center align-middle">Rute</th>
+                <th class="text-center align-middle">Uang Jalan</th>
                 <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
@@ -143,6 +144,7 @@
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vehicle->nomor_lambung}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->vendor->nickname}}</td>
                 <td class="text-center align-middle">{{$d->kas_uang_jalan->rute->nama}}</td>
+                <td class="text-end align-middle">{{number_format($d->kas_uang_jalan->nominal_transaksi, 0, ',','.')}}</td>
                 <td class="text-center align-middle">
                     @if (auth()->user()->role === 'admin')
                     <button class="btn btn-warning btn-block" type="button" data-bs-toggle="modal" data-bs-target="#modalVoid-{{$d->id}}">Void</button>

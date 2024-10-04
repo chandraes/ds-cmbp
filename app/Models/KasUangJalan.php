@@ -185,7 +185,7 @@ class KasUangJalan extends Model
             return ['status' => 'error', 'message' => 'Saldo tidak mencukupi. Saldo saat ini : '.number_format($saldoUangJalan, 0, ',', '.')];
         }
 
-        $rekening = Rekening::where('untuk', 'kas-uang-jalan')->first();
+        // $rekening = Rekening::where('untuk', 'kas-uang-jalan')->first();
 
         try {
             DB::beginTransaction();
@@ -200,9 +200,9 @@ class KasUangJalan extends Model
                 'uraian' => $data['uraian'],
                 'jenis_transaksi_id' => $jenisTransaksiId,
                 'saldo' => $saldo,
-                'transfer_ke' => $rekening->nama_rekening,
-                'bank' => $rekening->nama_bank,
-                'no_rekening' => $rekening->nomor_rekening,
+                'transfer_ke' => $data['transfer_ke'],
+                'bank' => $data['bank'],
+                'no_rekening' => $data['no_rekening'],
             ]);
 
             $pesan =    str_repeat($icon, 9)."\n".

@@ -272,6 +272,9 @@ class FormKasUangJalanController extends Controller
             'uraian' => 'required',
             'nominal_transaksi' => 'required',
             'tipe' => 'required',
+            'transfer_ke' => 'required',
+            'bank' => 'required',
+            'no_rekening' => 'required',
         ]);
 
         $db = new KasUangJalan();

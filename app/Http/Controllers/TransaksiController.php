@@ -29,7 +29,7 @@ class TransaksiController extends Controller
     {
         $data = Transaksi::join('kas_uang_jalans as kuj', 'transaksis.kas_uang_jalan_id', 'kuj.id')
                             ->leftJoin('vehicles as v', 'kuj.vehicle_id', 'v.id')
-                            ->select('transaksis.*', 'kuj.customer_id as customer_id', 'v.vendor_id as vendor_id')
+                            ->select('transaksis.*', 'kuj.customer_id as customer_id', 'v.vendor_id as vendor_id', 'kuj.nominal_transaksi as uang_jalan')
                             ->where('transaksis.void', 0)->get();
 
         $customer = Customer::all();

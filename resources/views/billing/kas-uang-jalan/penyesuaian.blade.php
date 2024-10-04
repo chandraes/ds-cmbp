@@ -28,7 +28,7 @@
             <div class="col-md-3 mb-3">
                 <div class="mb-3">
                     <label for="tipe" class="form-label">Jenis Transaksi</label>
-                    <select class="form-select" name="tipe" id="tipe" required>
+                    <select class="form-select" name="tipe" id="tipe" required onchange="checkRekening()">
                         <option value="" disabled selected>-- Pilih Salah Satu --</option>
                         <option value="1" {{old('tipe') == 1 ? 'selected' : ''}}>Dana Masuk</option>
                         <option value="0" {{old('tipe') == 1 ? 'selected' : ''}}>Dana Keluar</option>
@@ -57,12 +57,12 @@
 
             <div class="col-md-4 mb-3">
                 <label for="nama_rek" class="form-label">Nama</label>
-                <input type="text" class="form-control @if ($errors->has('nama_rek'))
+                <input type="text" class="form-control @if ($errors->has('transfer_ke'))
                     is-invalid
-                @endif" name="nama_rek" id="nama_rek" disabled value="{{$rekening->nama_rekening}}" >
-                @if ($errors->has('nama_rek'))
+                @endif" name="transfer_ke" id="transfer_ke" required >
+                @if ($errors->has('transfer_ke'))
                 <div class="invalid-feedback">
-                    {{$errors->first('nama_rek')}}
+                    {{$errors->first('transfer_ke')}}
                 </div>
                 @endif
             </div>
@@ -70,7 +70,7 @@
                 <label for="bank" class="form-label">Bank</label>
                 <input type="text" class="form-control @if ($errors->has('bank'))
                     is-invalid
-                @endif" name="bank" id="bank" disabled value="{{$rekening->nama_bank}}">
+                @endif" name="bank" id="bank" required >
                 @if ($errors->has('bank'))
                 <div class="invalid-feedback">
                     {{$errors->first('bank')}}
@@ -81,10 +81,10 @@
                 <label for="no_rek" class="form-label">Nomor Rekening</label>
                 <input type="text" class="form-control @if ($errors->has('no_rek'))
                     is-invalid
-                @endif" name="no_rek" id="no_rek" disabled value="{{$rekening->nomor_rekening}}">
-                @if ($errors->has('no_rek'))
+                @endif" name="no_rekening" id="no_rekening" required>
+                @if ($errors->has('no_rekening'))
                 <div class="invalid-feedback">
-                    {{$errors->first('no_rek')}}
+                    {{$errors->first('no_rekening')}}
                 </div>
                 @endif
             </div>
@@ -99,6 +99,21 @@
 @endsection
 @push('js')
     <script>
+
+        function checkRekening(){
+                var rekening = @json($rekening);
+                var tipe = document.getElementById('tipe').value;
+
+                if (tipe == 1) {
+                    document.getElementById('transfer_ke').value = rekening.nama_rekening;
+                    document.getElementById('bank').value = rekening.nama_bank;
+                    document.getElementById('no_rekening').value = rekening.nomor_rekening;
+                } else {
+                    document.getElementById('transfer_ke').value = '';
+                    document.getElementById('bank').value = '';
+                    document.getElementById('no_rekening').value = '';
+                }
+            }
 
         function checkNominal() {
             var nominal = document.getElementById('nominal_transaksi').value;

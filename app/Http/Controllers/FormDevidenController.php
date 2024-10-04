@@ -7,6 +7,7 @@ use App\Models\PemegangSaham;
 use App\Models\PersentaseAwal;
 use App\Models\Rekening;
 use App\Models\GroupWa;
+use App\Models\KasUangJalan;
 use Illuminate\Http\Request;
 use App\Services\StarSender;
 use Carbon\Carbon;
@@ -29,6 +30,9 @@ class FormDevidenController extends Controller
                 return redirect()->route('billing.index')->with('error', 'Persentase pemegang saham belum 100%');
             }
         }
+
+        $dbKasBesar = new KasBesar();
+        $dbKasUJ = new KasUangJalan();
 
         return view('billing.deviden.index', [
             'persen' => $persen,
