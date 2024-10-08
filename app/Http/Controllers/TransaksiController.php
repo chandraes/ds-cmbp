@@ -378,7 +378,7 @@ class TransaksiController extends Controller
         $res = $send->sendGroup();
 
 
-        return redirect()->route('billing.transaksi.index')->with('success', 'Berhasil menyimpan data!!');
+        return redirect()->route('billing.index')->with('success', 'Berhasil menyimpan data!!');
     }
 
 
@@ -467,7 +467,7 @@ class TransaksiController extends Controller
         $res = $send->sendGroup();
 
 
-        return redirect()->route('billing.transaksi.index')->with('success', 'Berhasil menyimpan data!!');
+        return redirect()->route('billing.index')->with('success', 'Berhasil menyimpan data!!');
 
     }
 
@@ -495,7 +495,7 @@ class TransaksiController extends Controller
             'timbangan_bongkar' => null,
         ]);
 
-        return redirect()->route('billing.transaksi.index')->with('success', 'Berhasil menyimpan data!!');
+        return redirect()->route('billing.index')->with('success', 'Berhasil menyimpan data!!');
 
     }
 
@@ -745,7 +745,7 @@ class TransaksiController extends Controller
             }
 
             DB::commit();
-            
+
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data!!');
@@ -821,7 +821,7 @@ class TransaksiController extends Controller
 
         DB::commit();
 
-        return redirect()->route('billing.transaksi.index')->with('success', 'Berhasil menyimpan data!!');
+        return redirect()->route('billing.index')->with('success', 'Berhasil menyimpan data!!');
     }
 
     public function nota_csr(Request $request)
@@ -874,7 +874,7 @@ class TransaksiController extends Controller
             ]);
         }
 
-        return redirect()->route('billing.transaksi.index')->with('success', 'Berhasil menyimpan data!!');
+        return redirect()->route('billing.index')->with('success', 'Berhasil menyimpan data!!');
     }
 
 

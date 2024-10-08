@@ -31,7 +31,7 @@
             </a>
         </div>
         <div class="col-md-4 text-center mt-5">
-            <a href="{{route('billing.transaksi.index')}}" class="text-decoration-none">
+            <a href="{{route('billing.index')}}" class="text-decoration-none">
                 <img src="{{asset('images/back.svg')}}" alt="" width="100">
                 <h2>KEMBALI</h2>
             </a>
