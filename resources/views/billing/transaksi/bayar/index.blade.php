@@ -265,6 +265,8 @@
 
         <form action="{{route('transaksi.nota-bayar.lanjut', $vendor)}}" method="post" id="lanjutForm">
             @csrf
+            <input type="hidden" name="ppn" value="{{$ppn}}">
+            <input type="hidden" name="pph" value="{{$pph}}">
             <input type="hidden" name="total_bayar" value="{{$grant_total}}">
             <button class="btn btn-primary me-md-3 btn-lg" type="submit">Lanjutkan</button>
         </form>
@@ -292,6 +294,7 @@
             "searching": false,
             "scrollCollapse": true,
             "scrollY": "550px",
+            "scrollX": true,
             "fixedColumns": {
                 "leftColumns": 3,
                 "rightColumns": 1

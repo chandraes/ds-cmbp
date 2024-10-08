@@ -16,6 +16,10 @@ use App\Models\InvoiceCsr;
 use App\Models\InvoiceCsrDetail;
 use App\Models\Sponsor;
 use App\Models\GroupWa;
+use App\Models\Pajak\PphPerusahaan;
+use App\Models\Pajak\PphSimpan;
+use App\Models\Pajak\PpnKeluaran;
+use App\Models\Pajak\PpnMasukan;
 use App\Services\StarSender;
 use App\Models\Rekening;
 use App\Models\PasswordKonfirmasi;
@@ -603,18 +607,48 @@ class TransaksiController extends Controller
         $invoiceTagihan['lunas'] = 0;
         $invoiceTagihan['periode'] = "Periode ".$invoiceTagihan['no_invoice'];
 
-        $invoice = InvoiceTagihan::create($invoiceTagihan);
+        try {
+            DB::beginTransaction();
 
-        foreach ($tagihan as $key => $value) {
-            $value->update([
-                'tagihan' => 1,
-            ]);
+            $invoice = InvoiceTagihan::create($invoiceTagihan);
 
-            InvoiceTagihanDetail::create([
-                'invoice_tagihan_id' => $invoice->id,
-                'transaksi_id' => $value->id,
-            ]);
+            if ($ppn > 0) {
+                PpnKeluaran::create([
+                    'invoice_tagihan_id' => $invoice->id,
+                    'uraian' => 'PPN '. $invoice->periode,
+                    'nominal' => $ppn,
+                ]);
+            }
+
+            if ($pph > 0) {
+                PphPerusahaan::create([
+                    'invoice_tagihan_id' => $invoice->id,
+                    'uraian' => 'PPh '. $invoice->periode,
+                    'nominal' => $pph
+                ]);
+            }
+
+            foreach ($tagihan as $key => $value) {
+                $value->update([
+                    'tagihan' => 1,
+                ]);
+
+                InvoiceTagihanDetail::create([
+                    'invoice_tagihan_id' => $invoice->id,
+                    'transaksi_id' => $value->id,
+                ]);
+            }
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data!!');
         }
+
+
 
         return redirect()->route('transaksi.nota-tagihan', $customer)->with('success', 'Berhasil menyimpan data!!');
 
@@ -652,6 +686,8 @@ class TransaksiController extends Controller
     {
         $data = $request->validate([
             'total_bayar' => 'required|numeric',
+            'ppn' => 'required|numeric',
+            'pph' => 'required|numeric',
         ]);
         // dd($data);
         $bayar = Transaksi::join('kas_uang_jalans as kuj', 'kuj.id', 'transaksis.kas_uang_jalan_id')
@@ -670,19 +706,52 @@ class TransaksiController extends Controller
         $data['bayar'] = 0;
         $data['lunas'] = 0;
         $data['periode'] = "Periode ".$data['no_invoice'];
+        $ppn = $data['ppn'];
+        $pph = $data['pph'];
 
-        $invoice = InvoiceBayar::create($data);
+        unset($data['ppn']);
+        unset($data['pph']);
 
-        foreach ($bayar as $key => $value) {
-            $value->update([
-                'bayar' => 1,
-            ]);
+        try {
+            DB::beginTransaction();
 
-            InvoiceBayarDetail::create([
-                'invoice_bayar_id' => $invoice->id,
-                'transaksi_id' => $value->id,
-            ]);
+            $invoice = InvoiceBayar::create($data);
+
+            if ($ppn > 0) {
+                PpnMasukan::create([
+                    'invoice_bayar_id' => $invoice->id,
+                    'uraian' => 'PPN '. $invoice->periode,
+                    'nominal' => $ppn,
+                ]);
+            }
+
+            if ($pph > 0) {
+                PphSimpan::create([
+                    'invoice_bayar_id' => $invoice->id,
+                    'uraian' => 'PPh '. $invoice->periode,
+                    'nominal' => $pph
+                ]);
+            }
+
+            foreach ($bayar as $key => $value) {
+                $value->update([
+                    'bayar' => 1,
+                ]);
+
+                InvoiceBayarDetail::create([
+                    'invoice_bayar_id' => $invoice->id,
+                    'transaksi_id' => $value->id,
+                ]);
+            }
+
+            DB::commit();
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data!!');
         }
+
+
 
         return redirect()->route('transaksi.nota-bayar', ['vendor_id' =>$vendor])->with('success', 'Berhasil menyimpan data!!');
 

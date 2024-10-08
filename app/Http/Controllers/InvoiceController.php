@@ -14,6 +14,10 @@ use App\Models\Vendor;
 use App\Models\KasVendor;
 use App\Models\Rekening;
 use App\Models\GroupWa;
+use App\Models\Pajak\PphPerusahaan;
+use App\Models\Pajak\PphSimpan;
+use App\Models\Pajak\PpnKeluaran;
+use App\Models\Pajak\PpnMasukan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Services\StarSender;
@@ -86,6 +90,22 @@ class InvoiceController extends Controller
             'sisa_tagihan' => 0,
             'lunas' => 1
         ]);
+
+        $ppn = PpnKeluaran::where('invoice_tagihan_id', $invoice->id)->first();
+
+        if ($ppn) {
+            $ppn->update([
+                'onhold' => 0
+            ]);
+        }
+
+        $pph = PphPerusahaan::where('invoice_tagihan_id', $invoice->id)->first();
+
+        if ($pph) {
+            $pph->update([
+                'onhold' => 0
+            ]);
+        }
 
         $group = GroupWa::where('untuk', 'kas-besar')->first();
         $last = KasBesar::latest()->first();
@@ -282,6 +302,22 @@ class InvoiceController extends Controller
             $data['sisa'] = $last->sisa - $total_bayar;
         } else {
             $data['sisa'] = -$total_bayar;
+        }
+
+        $ppn = PpnMasukan::where('invoice_bayar_id', $invoice->id)->first();
+
+        if ($ppn) {
+            $ppn->update([
+                'onhold' => 0
+            ]);
+        }
+
+        $pph = PphSimpan::where('invoice_bayar_id', $invoice->id)->first();
+
+        if ($pph) {
+            $pph->update([
+                'onhold' => 0
+            ]);
         }
 
         KasVendor::create($data);
