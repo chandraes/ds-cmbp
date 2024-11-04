@@ -115,7 +115,7 @@ class FormVendorController extends Controller
     public function get_plafon_titipan(Request $request)
     {
         $vendor = Vendor::find($request->id);
-        
+
         $kas = KasVendor::where('vendor_id', $request->id)->latest()->orderBy('id', 'desc')->first()->sisa ?? 0;
 
         $mobil = Vehicle::where('vendor_id', $request->id)->whereNot('status', 'nonaktif')->count();
@@ -188,7 +188,9 @@ class FormVendorController extends Controller
 
         $store2 = KasVendor::create($vendor);
 
-        $store = KasBesar::create($kas);
+        $dbKasBesar = new KasBesar();
+
+        $store = $dbKasBesar->create($kas);
 
         $group = GroupWa::where('untuk', 'kas-besar')->first();
 
@@ -210,8 +212,10 @@ class FormVendorController extends Controller
                     "Rp. ".number_format($store2->sisa, 0, ',', '.')."\n\n".
                     "Terima kasih 🙏🙏🙏\n";
 
-        $send = new StarSender($group->nama_group, $pesan);
-        $res = $send->sendGroup();
+        $res = $dbKasBesar->sendWa($group->nama_group, $pesan);
+
+        // $send = new StarSender($group->nama_group, $pesan);
+        // $res = $send->sendGroup();
 
         return redirect()->route('billing.index')->with('success', 'Data berhasil disimpan');
 
