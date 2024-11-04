@@ -32,7 +32,7 @@
                 <tr>
                     <th class="text-center align-middle">Tanggal Input</th>
                     <th class="text-center align-middle">Nota</th>
-                    <th class="text-center align-middle">Konsumen</th>
+                    <th class="text-center align-middle">Customer</th>
                     <th class="text-center align-middle">Uraian</th>
                     <th class="text-center align-middle">Faktur</th>
                     <th class="text-center align-middle">Disetor<br>Sendiri </th>
@@ -44,17 +44,16 @@
                 @foreach ($data as $d)
                 <tr>
 
-                    <td class="text-center align-middle">{{$d->invoiceJual ? $d->invoiceJual->tanggal : '-'}}</td>
+                    <td class="text-center align-middle">{{$d->invoiceTagihan ? $d->invoiceTagihan->tanggal : '-'}}</td>
                     <td class="text-center align-middle">
-                        @if ($d->invoiceJual)
-                        <a href="{{route('billing.invoice-konsumen.detail', ['invoice' => $d->invoice_jual_id])}}">
-                            {{$d->invoiceJual->kode}}
+                        @if ($d->invoiceTagihan)
+                        <a href="{{route('invoice.tagihan.detail', ['invoice' => $d->invoice_tagihan_id])}}">
+                            {{$d->invoiceTagihan->periode}}
                         </a>
                         @endif
 
                     </td>
-                    <td class="text-center align-middle">{{$d->invoiceJual->konsumen ? $d->invoiceJual->konsumen->nama :
-                        $d->invoiceJual->konsumen_temp->nama}}</td>
+                    <td class="text-center align-middle">{{$d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->singkatan : ''}}</td>
                     <td class="text-start align-middle">
                         {{$d->uraian}}
                     </td>

@@ -12,6 +12,8 @@ class PpnKeluaran extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['tanggal', 'nf_nominal'];
+
     public function invoiceTagihan()
     {
         return $this->belongsTo(InvoiceTagihan::class, 'invoice_tagihan_id');

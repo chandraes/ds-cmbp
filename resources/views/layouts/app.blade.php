@@ -99,7 +99,7 @@
                 </div>
             </div>
         </nav>
-
+        @include('swal')
         <main class="py-4 mt-4">
             @yield('content')
         </main>

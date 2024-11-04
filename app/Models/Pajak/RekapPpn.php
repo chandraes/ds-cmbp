@@ -90,7 +90,7 @@ class RekapPpn extends Model
     {
         $db = new PpnMasukan();
 
-        $data = $db->where('is_keranjang', 1)->where('is_finish', 0)->get();
+        $data = $db->where('keranjang', 1)->where('selesai', 0)->get();
 
         $total = $data->sum('nominal');
 
@@ -113,8 +113,8 @@ class RekapPpn extends Model
                 ]);
 
                 $item->update([
-                    'is_finish' => 1,
-                    'is_keranjang' => 0,
+                    'selesai' => 1,
+                    'keranjang' => 0,
                 ]);
             }
 
@@ -140,12 +140,11 @@ class RekapPpn extends Model
     {
         $db = new PpnKeluaran();
 
-        $data = $db->where('is_keranjang', 1)->where('is_finish', 0)->get();
+        $data = $db->where('onhold', 0)->where('keranjang', 1)->where('selesai', 0)->get();
 
         $total = $data->where('dipungut', 1)->sum('nominal');
 
         $saldo = $this->saldoTerakhir() - $total;
-
 
 
         try {
@@ -166,7 +165,7 @@ class RekapPpn extends Model
 
                 $nominalKasBesar = abs($saldo);
 
-                $saldoKasBesar = $dbKasBesar->saldoTerakhir(1);
+                $saldoKasBesar = $dbKasBesar->saldoTerakhir();
 
                 if ($saldoKasBesar < $nominalKasBesar) {
                     return [
@@ -176,15 +175,15 @@ class RekapPpn extends Model
                 }
 
                 $store = $dbKasBesar->create([
-                    'ppn_kas' => 1,
+                    'tanggal' => date('Y-m-d'),
                     'uraian' => 'Pembayaran PPN',
-                    'jenis' => 0,
-                    'nominal' => $nominalKasBesar,
-                    'saldo' => $dbKasBesar->saldoTerakhir(1) - $nominalKasBesar,
-                    'no_rek' => 'Pajak',
-                    'nama_rek' => 'Pajak',
+                    'jenis_transaksi_id' => 2,
+                    'nominal_transaksi' => $nominalKasBesar,
+                    'saldo' => $dbKasBesar->saldoTerakhir() - $nominalKasBesar,
+                    'no_rekening' => 'Pajak',
+                    'transfer_ke' => 'Pajak',
                     'bank' => 'Pajak',
-                    'modal_investor_terakhir' => $dbKasBesar->modalInvestorTerakhir(1),
+                    'modal_investor_terakhir' => $dbKasBesar->modalInvestorTerakhir(),
                 ]);
 
                 $this->create([
@@ -196,35 +195,20 @@ class RekapPpn extends Model
 
                 $waState = 1;
 
-                $kasPpn = [
-                    'saldo' => $dbKasBesar->saldoTerakhir(1),
-                    'modal_investor' => $dbKasBesar->modalInvestorTerakhir(1),
-                ];
-
-                $kasNonPpn = [
-                    'saldo' => $dbKasBesar->saldoTerakhir(0),
-                    'modal_investor' => $dbKasBesar->modalInvestorTerakhir(0),
-                ];
-
-                // sum modal investor
-                $totalModal = $kasPpn['modal_investor'] + $kasNonPpn['modal_investor'];
-
                 $pesan = "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n".
                         "*Form PPN*\n".
                         "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n\n".
                         "Uraian : ".$store->uraian."\n".
-                        "Nilai :  *Rp. ".number_format($store->nominal, 0, ',', '.')."*\n\n".
+                        "Nilai :  *Rp. ".number_format($store->nominal_transaksi, 0, ',', '.')."*\n\n".
                         "Ditransfer ke rek:\n\n".
                         "Bank      : ".$store->bank."\n".
-                        "Nama    : ".$store->nama_rek."\n".
-                        "No. Rek : ".$store->no_rek."\n\n".
+                        "Nama    : ".$store->transfer_ke."\n".
+                        "No. Rek : ".$store->no_rekening."\n\n".
                         "==========================\n".
-                        "Sisa Saldo Kas Besar PPN: \n".
-                        "Rp. ".number_format($kasPpn['saldo'], 0, ',', '.')."\n\n".
-                        "Sisa Saldo Kas Besar  NON PPN: \n".
-                        "Rp. ".number_format($kasNonPpn['saldo'], 0, ',', '.')."\n\n".
+                        "Sisa Saldo Kas Besar: \n".
+                        "Rp. ".number_format($dbKasBesar->saldoTerakhir(), 0, ',', '.')."\n\n".
                         "Total Modal Investor : \n".
-                        "Rp. ".number_format($totalModal, 0, ',', '.')."\n\n".
+                        "Rp. ".number_format($dbKasBesar->modalInvestorTerakhir(), 0, ',', '.')."\n\n".
                         "Terima kasih 🙏🙏🙏\n";
 
             }
@@ -237,15 +221,16 @@ class RekapPpn extends Model
                 ]);
 
                 $item->update([
-                    'is_finish' => 1,
-                    'is_keranjang' => 0,
+                    'selesai' => 1,
+                    'keranjang' => 0,
                 ]);
             }
 
             DB::commit();
 
             if ($waState == 1) {
-                $tujuan = GroupWa::where('untuk', 'kas-besar-ppn')->first()->nama_group;
+                $tujuan = GroupWa::where('untuk', 'kas-besar')->first()->nama_group;
+
                 $dbKasBesar->sendWa($tujuan, $pesan);
             }
 
