@@ -60,23 +60,19 @@
         <table class="table table-hover table-bordered" id="rekapTable">
             <thead class=" table-success">
                 <tr>
-                    <th class="text-center align-middle" rowspan="2">
+                    <th class="text-center align-middle">
 
                         {{-- select all --}}
                         <input style="height: 25px; width:25px" type="checkbox" onclick="checkAll(this)" id="checkAll">
                     </th>
-                    <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
-                    <th rowspan="2" class="text-center align-middle">Nota</th>
-                    <th rowspan="2" class="text-center align-middle">Konsumen</th>
-                    <th rowspan="2" class="text-center align-middle">Uraian</th>
+                    <th class="text-center align-middle">Tanggal Input</th>
+                    <th class="text-center align-middle">Nota</th>
+                    <th class="text-center align-middle">Konsumen</th>
+                    <th class="text-center align-middle">Uraian</th>
                     {{-- <th class="text-center align-middle">Tanggal Bayar</th> --}}
-                    <th colspan="2" class="text-center align-middle">Sebelum Terbit Faktur</th>
-                    <th rowspan="2" class="text-center align-middle">Setelah<br>Terbit<br>Faktur</th>
-                    <th rowspan="2" class="text-center align-middle">ACT</th>
-                </tr>
-                <tr>
-                    <th class="text-center align-middle">Non NPWP</th>
-                    <th class="text-center align-middle">NPWP</th>
+                    <th class="text-center align-middle">Sebelum Terbit Faktur</th>
+                    <th class="text-center align-middle">Setelah<br>Terbit<br>Faktur</th>
+                    <th class="text-center align-middle">ACT</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,21 +103,9 @@
                     <td class="text-start align-middle">
                         {{$d->uraian}}
                     </td>
-                    {{-- <td class="text-center align-middle">{{$d->tanggal}}</td> --}}
-                    <td class="text-end align-middle">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp :
-                        $d->invoiceTagihan->customer_temp->npwp) < 10)) {{$d->nf_nominal}}
-                            @php
-                            $totalNonNpwp += $d->nominal;
-                            @endphp
-                            @else
-                            0
-                            @endif
-                    </td>
                     <td
                         class="text-end align-middle @if ($d->dipungut == 0 && $d->is_faktur == 0) table-danger @endif ">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp :
-                        $d->invoiceTagihan->customer_temp->npwp) > 10 ))
+                        @if ($d->is_faktur == 0)
                         {{$d->nf_nominal}}
                         @php
                         $totalNpwp += $d->nominal;
@@ -164,7 +148,6 @@
             <tfoot>
                 <tr>
                     <th class="text-end align-middle" colspan="5">Grand Total</th>
-                    <th class="text-end align-middle">{{number_format($totalNonNpwp, 0, ',','.')}}</th>
                     <th class="text-end align-middle">{{number_format($totalNpwp, 0, ',','.')}}</th>
                     <th class="text-end align-middle">{{number_format($totalFaktur, 0, ',','.')}}</th>
                     <th></th>
