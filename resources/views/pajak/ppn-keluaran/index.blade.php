@@ -93,24 +93,24 @@
                             data-tagihan="{{$d->nominal}}" onclick="check(this, {{$d->id}})" id="idSelect-{{$d->id}}"
                             {{$d->is_faktur == 0 ? 'disabled' : ''}}>
                     </td>
-                    <td class="text-center align-middle">{{$d->invoiceJual ? $d->invoiceJual->tanggal : '-'}}</td>
+                    <td class="text-center align-middle">{{$d->invoiceTagihan ? $d->invoiceTagihan->tanggal : '-'}}</td>
                     <td class="text-center align-middle">
-                        @if ($d->invoiceJual)
-                        <a href="{{route('billing.invoice-konsumen.detail', ['invoice' => $d->invoice_jual_id])}}">
-                            {{$d->invoiceJual->kode}}
+                        @if ($d->invoiceTagihan)
+                        <a href="{{route('invoice.tagihan.detail', ['invoice' => $d->invoice_tagihan_id])}}">
+                            {{$d->invoiceTagihan->periode}}
                         </a>
                         @endif
 
                     </td>
-                    <td class="text-center align-middle">{{$d->invoiceJual->konsumen ? $d->invoiceJual->konsumen->nama :
-                        $d->invoiceJual->konsumen_temp->nama}}</td>
+                    <td class="text-center align-middle">{{$d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->nama :
+                        $d->invoiceTagihan->customer_temp->nama}}</td>
                     <td class="text-start align-middle">
                         {{$d->uraian}}
                     </td>
                     {{-- <td class="text-center align-middle">{{$d->tanggal}}</td> --}}
                     <td class="text-end align-middle">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceJual->konsumen ? $d->invoiceJual->konsumen->npwp :
-                        $d->invoiceJual->konsumen_temp->npwp) < 10)) {{$d->nf_nominal}}
+                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp :
+                        $d->invoiceTagihan->customer_temp->npwp) < 10)) {{$d->nf_nominal}}
                             @php
                             $totalNonNpwp += $d->nominal;
                             @endphp
@@ -120,8 +120,8 @@
                     </td>
                     <td
                         class="text-end align-middle @if ($d->dipungut == 0 && $d->is_faktur == 0) table-danger @endif ">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceJual->konsumen ? $d->invoiceJual->konsumen->npwp :
-                        $d->invoiceJual->konsumen_temp->npwp) > 10 ))
+                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp :
+                        $d->invoiceTagihan->customer_temp->npwp) > 10 ))
                         {{$d->nf_nominal}}
                         @php
                         $totalNpwp += $d->nominal;
@@ -143,7 +143,7 @@
                         @endif
                     </td>
                     <td class="text-center align-middle">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceJual->konsumen ? $d->invoiceJual->konsumen->npwp : $d->invoiceJual->konsumen_temp->npwp) < 10)) {{-- form to expired button --}}
+                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp : $d->invoiceTagihan->customer_temp->npwp) < 10)) {{-- form to expired button --}}
                         <form
                             action="{{route('pajak.ppn-keluaran.expired', ['ppnKeluaran' => $d->id])}}" method="post" class="d-inline expired-form" id="expiredForm{{ $d->id }}" data-id="{{ $d->id }}">
                             @csrf
