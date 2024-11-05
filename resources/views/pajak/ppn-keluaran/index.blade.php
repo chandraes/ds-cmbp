@@ -67,7 +67,7 @@
                     </th>
                     <th class="text-center align-middle">Tanggal Input</th>
                     <th class="text-center align-middle">Nota</th>
-                    <th class="text-center align-middle">Konsumen</th>
+                    <th class="text-center align-middle">Customer</th>
                     <th class="text-center align-middle">Uraian</th>
                     {{-- <th class="text-center align-middle">Tanggal Bayar</th> --}}
                     <th class="text-center align-middle">Sebelum Terbit Faktur</th>
@@ -98,8 +98,7 @@
                         @endif
 
                     </td>
-                    <td class="text-center align-middle">{{$d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->nama :
-                        $d->invoiceTagihan->customer_temp->nama}}</td>
+                    <td class="text-center align-middle">{{$d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->singkatan : ""}}</td>
                     <td class="text-start align-middle">
                         {{$d->uraian}}
                     </td>
@@ -127,7 +126,7 @@
                         @endif
                     </td>
                     <td class="text-center align-middle">
-                        @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp : $d->invoiceTagihan->customer_temp->npwp) < 10)) {{-- form to expired button --}}
+                        {{-- @if ($d->is_faktur == 0 && (strlen($d->invoiceTagihan->customer ? $d->invoiceTagihan->customer->npwp : $d->invoiceTagihan->customer_temp->npwp) < 10))
                         <form
                             action="{{route('pajak.ppn-keluaran.expired', ['ppnKeluaran' => $d->id])}}" method="post" class="d-inline expired-form" id="expiredForm{{ $d->id }}" data-id="{{ $d->id }}">
                             @csrf
@@ -136,7 +135,7 @@
                                 Expired
                             </button>
                             </form>
-                            @endif
+                            @endif --}}
                             <button type="button" class="btn btn-{{$d->is_faktur == 1 ? 'warning' : 'primary'}} btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modalFaktur" onclick="faktur({{$d->id}})">
                                 {{$d->is_faktur == 1 ? 'Ubah' : ''}} Faktur
