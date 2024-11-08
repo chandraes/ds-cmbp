@@ -45,6 +45,8 @@
                                 width="30"> Dashboard</a></td>
                     <td><a href="{{route('billing.index')}}"><img src="{{asset('images/billing.svg')}}"
                                 alt="dokumen" width="30"> Billing</a></td>
+                    <td class="align-middle"><a href="{{route('transaksi.nota-tagihan.keranjang', ['customer' => $customer->id])}}"><i class="fa fa-cart-arrow-down me-2" style="font-size: 30px"></i> Keranjang @if ($keranjang > 0) <span
+                        class="badge bg-danger">{{$keranjang}}</span> @endif</a></td>
                 </tr>
             </table>
         </div>
