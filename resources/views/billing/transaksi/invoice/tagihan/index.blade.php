@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12 text-center">
             <h1><u>INVOICE TAGIHAN</u></h1>
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<div class="container mt-5 table-responsive ">
+<div class="container-fluid mt-5 table-responsive ">
     <table class="table table-bordered table-hover" id="data-table">
         <thead class="table-success">
             <tr>
@@ -76,13 +76,13 @@
                 <td class="text-end align-middle">
                     {{$d->nf_pph}}
                 </td>
-                <td class="text-center align-middle">
+                <td class="text-end align-middle">
                     {{number_format($d->total_tagihan, 0, ',', '.')}}
                 </td>
-                <td class="text-center align-middle">
+                <td class="text-end align-middle">
                     {{number_format($d->total_bayar, 0, ',', '.')}}
                 </td>
-                <td class="text-center align-middle">
+                <td class="text-end align-middle">
                     {{number_format($d->sisa_tagihan, 0, ',', '.')}}
                 </td>
                 <td class="text-center align-middle">
