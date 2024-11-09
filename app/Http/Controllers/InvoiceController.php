@@ -197,6 +197,10 @@ class InvoiceController extends Controller
         if ($data['cicilan'] == $invoice->sisa_tagihan) {
             $data['lunas'] = 1;
 
+            PpnKeluaran::where('invoice_tagihan_id', $invoice->id)->update([
+                'onhold' => 0
+            ]);
+
             $lastNomor = KasBesar::whereNotNull('nomor_kode_tagihan')->latest()->first();
 
             if($lastNomor == null)
