@@ -729,6 +729,7 @@ class RekapController extends Controller
             'data' => $invoice->transaksi,
             'customer' => $customer,
             'periode' => $periode,
+            'invoice' => $invoice,
             'invoice_id' => $invoice->id
         ]);
     }

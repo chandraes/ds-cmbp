@@ -148,10 +148,14 @@
                     colspan="{{9 + ($customer->tanggal_muat == 1 ? 1 : 0) + ($customer->nota_muat == 1 ? 1 : 0) + ($customer->tonase == 1 ? 1 : 0) +
                                                                 ($customer->tanggal_bongkar == 1 ? 1 : 0) + ($customer->selisih == 1 ? 2 : 0)}}"></td>
                 <td class="text-center align-middle"><strong>PPN</strong></td>
-                <td align="right" class="align-middle">
-
+                <td align="right" class="align-middle @if ($invoice->ppn_dipungut == 0)
+                    table-danger
+                @endif">
+                    @if ($invoice->ppn == 0)
                     {{number_format($ppn, 0, ',', '.')}}
-
+                    @else
+                    {{number_format($invoice->ppn, 0, ',', '.')}}
+                    @endif
                 </td>
                 <td></td>
                 <td></td>
@@ -163,8 +167,12 @@
                 </td>
                 <td class="text-center align-middle"><strong>PPh</strong></td>
                 <td align="right" class="align-middle">
-
+                    @if ($invoice->pph == 0)
                     {{number_format($pph, 0, ',', '.')}}
+                    @else
+                    {{number_format($invoice->pph, 0, ',', '.')}}
+                    @endif
+
 
                 </td>
                 <td></td>
@@ -177,7 +185,7 @@
                 </td>
                 <td class="text-center align-middle"><strong>Tagihan</strong></td>
                 <td align="right" class="align-middle"> <strong>
-                        {{number_format($total_tagihan-$pph+$ppn, 0, ',', '.')}}</strong>
+                        {{number_format($invoice->total_tagihan, 0, ',', '.')}}</strong>
                 </td>
                 <td></td>
                 <td></td>
