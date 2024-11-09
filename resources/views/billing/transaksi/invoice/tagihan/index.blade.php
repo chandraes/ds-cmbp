@@ -38,6 +38,11 @@
                 <th class="text-center align-middle">Tanggal</th>
                 <th class="text-center align-middle">Customer</th>
                 <th class="text-center align-middle">Invoice</th>
+                <th class="text-center align-middle">DPP</th>
+                <th class="text-center align-middle">Penyesuaian</th>
+                <th class="text-center align-middle">Penalti</th>
+                <th class="text-center align-middle">Ppn</th>
+                <th class="text-center align-middle">Pph</th>
                 <th class="text-center align-middle">Total Tagihan</th>
                 <th class="text-center align-middle">Balance</th>
                 <th class="text-center align-middle">Sisa Tagihan</th>
@@ -55,6 +60,21 @@
                 <td class="text-center align-middle">{{$d->customer->singkatan}}</td>
                 <td class="text-center align-middle">
                     <a href="{{route('invoice.tagihan.detail', $d)}}"> {{$d->periode}}</a>
+                </td>
+                <td class="text-end align-middle">
+                    {{$d->nf_total_awal}}
+                </td>
+                <td class="text-end align-middle">
+                    {{$d->nf_penyesuaian}}
+                </td>
+                <td class="text-end align-middle">
+                    {{$d->nf_penalty}}
+                </td>
+                <td class="text-end align-middle @if ($d->ppn_dipungut == 0) table-danger @endif">
+                    {{$d->nf_ppn}}
+                </td>
+                <td class="text-end align-middle">
+                    {{$d->nf_pph}}
                 </td>
                 <td class="text-center align-middle">
                     {{number_format($d->total_tagihan, 0, ',', '.')}}

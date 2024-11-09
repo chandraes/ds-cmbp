@@ -37,9 +37,11 @@ return new class extends Migration
         foreach ($data as $invoice) {
             $ppn = PpnKeluaran::where('invoice_tagihan_id', $invoice->id)->first();
             $pph = PphPerusahaan::where('invoice_tagihan_id', $invoice->id)->first();
+            $nilai_ppn = $ppn ? $ppn->nominal : 0;
+            $nilai_pph = $pph ? $pph->nominal : 0;
             $invoice->ppn = $ppn ? $ppn->nominal : 0;
             $invoice->pph = $pph ? $pph->nominal : 0;
-            $invoice->total_awal = $invoice->total_tagihan;
+            $invoice->total_awal = $invoice->total_tagihan - $nilai_ppn + $nilai_pph;
             $invoice->save();
         }
     }
