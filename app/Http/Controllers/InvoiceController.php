@@ -212,6 +212,7 @@ class InvoiceController extends Controller
 
         } else {
             $data['lunas'] = 0;
+            $data['nomor_kode_tagihan'] = null;
         }
 
         $data['total_bayar'] = $data['cicilan'] + $invoice->total_bayar;
@@ -249,6 +250,7 @@ class InvoiceController extends Controller
                 'uraian' => $data['uraian'],
                 'jenis_transaksi_id' => $data['jenis_transaksi_id'],
                 'nominal_transaksi' => $data['nominal_transaksi'],
+                'nomor_kode_tagihan' => $data['nomor_kode_tagihan'],
                 'saldo' => $data['saldo'],
                 'tanggal' => $data['tanggal'],
                 'transfer_ke' => $data['transfer_ke'],
