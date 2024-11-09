@@ -206,19 +206,27 @@ class InvoiceController extends Controller
                 $data['nomor_kode_tagihan'] = $lastNomor->nomor_kode_tagihan + 1;
             }
 
+        } else {
+            $data['lunas'] = 0;
         }
 
         $data['total_bayar'] = $data['cicilan'] + $invoice->total_bayar;
 
         $data['sisa_tagihan'] = $invoice->sisa_tagihan - $data['cicilan'];
 
-        $invoice->update($data);
+        $invoice->update([
+            'total_bayar' => $data['total_bayar'],
+            'sisa_tagihan' => $data['sisa_tagihan'],
+            'lunas' => $data['lunas']
+        ]);
 
         $group = GroupWa::where('untuk', 'kas-besar')->first();
 
         $last = KasBesar::latest()->first();
 
         if ($last) {
+            $dbKas = new KasBesar();
+
             $data['uraian'] = 'Cicil '.$invoice->customer->singkatan.' - '.$invoice->periode;
             $data['jenis_transaksi_id'] = 1;
             $data['nominal_transaksi'] = $data['cicilan'];
@@ -233,7 +241,17 @@ class InvoiceController extends Controller
 
             $data['modal_investor_terakhir'] = $last->modal_investor_terakhir;
 
-            $store = KasBesar::create($data);
+            $store = $dbKas->create([
+                'uraian' => $data['uraian'],
+                'jenis_transaksi_id' => $data['jenis_transaksi_id'],
+                'nominal_transaksi' => $data['nominal_transaksi'],
+                'saldo' => $data['saldo'],
+                'tanggal' => $data['tanggal'],
+                'transfer_ke' => $data['transfer_ke'],
+                'no_rekening' => $data['no_rekening'],
+                'bank' => $data['bank'],
+                'modal_investor_terakhir' => $data['modal_investor_terakhir']
+            ]);
 
             $pesan ="🔵🔵🔵🔵🔵🔵🔵🔵🔵\n".
                 "*CICILAN INVOICE*\n".
@@ -251,8 +269,10 @@ class InvoiceController extends Controller
                 "Total Modal Investor : \n".
                 "Rp. ".number_format($store->modal_investor_terakhir, 0, ',', '.')."\n\n".
                 "Terima kasih 🙏🙏🙏\n";
-            $send = new StarSender($group->nama_group, $pesan);
-            $res = $send->sendGroup();
+
+            $dbKas->sendWa($group->nama_group, $pesan);
+            // $send = new StarSender($group->nama_group, $pesan);
+            // $res = $send->sendGroup();
         }
 
         return redirect()->back()->with('success', 'Invoice berhasil di cicil');
