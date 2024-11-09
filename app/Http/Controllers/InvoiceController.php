@@ -506,6 +506,8 @@ class InvoiceController extends Controller
             ]);
         }
 
+        PpnKeluaran::where('invoice_tagihan_id', $invoice->id)->delete();
+
         $invoice->delete();
 
         DB::commit();
