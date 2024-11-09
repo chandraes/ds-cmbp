@@ -173,7 +173,9 @@
 
 
     $(document).ready(function() {
-        $('#data-table').DataTable();
+        $('#data-table').DataTable({
+            "order": [[2, "asc"]] // Sort by the second column (index 1) in ascending order
+        });
 
     } );
 
