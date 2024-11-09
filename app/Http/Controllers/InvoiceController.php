@@ -59,6 +59,7 @@ class InvoiceController extends Controller
         return view('billing.transaksi.invoice.tagihan.detail', [
             'data' => $data,
             'customer' => $customer,
+            'invoice' => $invoice,
             'periode' => $periode,
             'invoice_id' => $invoice->id
         ]);
