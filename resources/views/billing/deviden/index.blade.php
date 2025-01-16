@@ -7,71 +7,10 @@
         </div>
     </div>
     @include('swal')
-    <div class="row justify-content-center">
-        @php
-            // $total1 = $modalInvestor+$ppn;
-            // $total2 = $totalTitipan+$totalTagihan+$kasBesar;
-            // $estimasi = $total2-$total1;
-        @endphp
-        <div class="col-md-6">
-            <table class="table table-striped table-hover">
-                <tbody>
-                    <tr>
-                        <th>Estimasi Profit</th>
-                        <th>:</th>
-                        <th class="text-end align-middle">{{number_format($estimasi, 0,',','.')}}</th>
-                    </tr>
-                    <tr>
-                        <td>Modal Investor</td>
-                        <td>:</td>
-                        <td class="text-end align-middle"> {{number_format($modalInvestor, 0,',','.')}}</td>
-                    </tr>
-                    <tr>
-                        <td>Total PPN Belum Bayar</td>
-                        <td>:</td>
-                        <td class="text-end align-middle"> {{number_format($ppn, 0,',','.')}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <th>:</th>
-                        <th class="text-end align-middle"> {{number_format($modalInvestor+$ppn+$estimasi, 0,',','.')}}</th>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Saldo Kas</td>
-                        <td>:</td>
-                        <td class="text-end align-middle"> {{number_format($kasBesar, 0,',','.')}}</td>
-                    </tr>
-                    <tr>
-                        <td>Total Tagihan</td>
-                        <td>:</td>
-                        <td class="text-end align-middle"> {{number_format($totalTagihan, 0,',','.')}}</td>
-                    </tr>
-                    <tr>
-                        <td>Titipan Supplier</td>
-                        <td>:</td>
-                        <td class="text-end align-middle"> {{number_format($totalTitipan, 0,',','.')}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <th>:</th>
-                        <th class="text-end align-middle"> {{number_format($total2, 0,',','.')}}</th>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
     <form action="{{route('billing.deviden.store')}}" method="post" id="masukForm">
         @csrf
         <div class="row">
-            <div class="col-md-2 mb-3">
+            <div class="col-4 mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="text" class="form-control @if ($errors->has('tanggal'))
                     is-invalid
@@ -88,19 +27,6 @@
                 @if ($errors->has('nominal_transaksi'))
                 <div class="invalid-feedback">
                     {{$errors->first('nominal_transaksi')}}
-                </div>
-                @endif
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="uraian" class="form-label">Uraian</label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control @if ($errors->has('uraian'))
-                    is-invalid
-                @endif" name="uraian" id="uraian" required maxlength="20">
-                </div>
-                @if ($errors->has('uraian'))
-                <div class="invalid-feedback">
-                    {{$errors->first('uraian')}}
                 </div>
                 @endif
             </div>
@@ -140,6 +66,7 @@
 </div>
 @endsection
 @push('js')
+{{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> --}}
 <script src="{{asset('assets/js/moment.min.js')}}"></script>
 <script>
         $(function() {

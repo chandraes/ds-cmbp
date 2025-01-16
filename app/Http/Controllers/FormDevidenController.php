@@ -47,19 +47,21 @@ class FormDevidenController extends Controller
     {
         $data = $request->validate([
             'nominal_transaksi' => 'required',
-            'uraian' => 'required',
         ]);
 
         $data['nominal_transaksi'] = str_replace('.', '', $data['nominal_transaksi']);
 
-        $last = KasBesar::latest()->first();
+        $last = KasBesar::latest()->orderBy('id', 'desc')->first();
 
         if ($last == null || $last->saldo < $data['nominal_transaksi']) {
             return redirect()->route('billing.deviden.index')->with('error', 'Saldo tidak cukup');
         }
 
         $persentase = PersentaseAwal::all();
-        $group = GroupWa::where('untuk', 'kas-besar')->first();
+
+        $dbWa = new GroupWa();
+        $group = $dbWa->where('untuk', 'kas-besar')->first();
+
         $month = Carbon::now()->locale('id')->monthName;
 
         $isiPesan = [];
@@ -78,7 +80,7 @@ class FormDevidenController extends Controller
 
                 $k['tanggal'] = date('Y-m-d');
                 $k['jenis_transaksi_id'] = 2;
-                $k['uraian'] = "Bagi Deviden ".$v->nama. " ".$data['uraian'];
+                $k['uraian'] = "Bagi Deviden ".$v->nama;
                 $k['nominal_transaksi'] = $nilai2;
                 $k['saldo'] = $last2->saldo - $nilai2;
                 $k['transfer_ke'] = substr($v->nama_rekening, 0, 15);
@@ -89,10 +91,9 @@ class FormDevidenController extends Controller
                 $store = KasBesar::create($k);
 
                 $pesan =    "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n".
-                            "*Form Deviden*\n".
+                            "*Form Deviden ".$month."*\n".
                             "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n\n".
                             "Nama  : ".$v->nama."\n".
-                            "Uraian : ".$k['uraian']."\n".
                             "Nilai :  *Rp. ".number_format($k['nominal_transaksi'], 0, ',', '.')."*\n\n".
                             "Ditransfer ke rek:\n\n".
                             "Bank      : ".$k['bank']."\n".
@@ -114,8 +115,7 @@ class FormDevidenController extends Controller
         // looping $isiPesan
         foreach ($isiPesan as $pesan) {
 
-            $send = new StarSender($group->nama_group, $pesan);
-            $res = $send->sendGroup();
+            $send = $dbWa->sendWa($group->nama_group, $pesan);
 
         }
 
