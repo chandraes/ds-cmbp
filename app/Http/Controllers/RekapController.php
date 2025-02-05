@@ -436,7 +436,7 @@ class RekapController extends Controller
         KasVendor::create($data);
 
         if ($kas_vendor->storing == 1) {
-            $last = KasBesar::latest()->first();
+            $last = KasBesar::latest()->orderBy('id', 'desc')->first();
             $rekening = Rekening::where('untuk', 'kas-besar')->first();
 
             $kas['tanggal'] = date('Y-m-d');
@@ -567,7 +567,7 @@ class RekapController extends Controller
             return redirect()->back()->with('error', 'Password salah!!');
         }
 
-        $kasBesar = KasBesar::latest()->first();
+        $kasBesar = KasBesar::latest()->orderBy('id', 'desc')->first();
         $rekening = Rekening::where('untuk', 'kas-besar')->first();
 
         $k['uraian'] = 'Void Kasbon '.$kas->karyawan->nama;

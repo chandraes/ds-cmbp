@@ -9,12 +9,13 @@ use App\Models\Legalitas\LegalitasDokumen;
 use Illuminate\Http\Request;
 use App\Services\StarSender;
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Group;
 
 class FormKasBesarController extends Controller
 {
     public function masuk()
     {
-        $nomor = KasBesar::whereNotNull('nomor_kode_deposit')->latest()->first();
+        $nomor = KasBesar::whereNotNull('nomor_kode_deposit')->latest()->orderBy('id', 'desc')->first();
 
         if($nomor == null){
             $nomor = 1;
@@ -43,7 +44,7 @@ class FormKasBesarController extends Controller
         $data['bank'] = $rekening->nama_bank;
 
         // Nomor Kode Kas Besar Terakhir
-        $lastNomor = KasBesar::whereNotNull('nomor_kode_deposit')->latest()->first();
+        $lastNomor = KasBesar::whereNotNull('nomor_kode_deposit')->latest()->orderBy('id', 'desc')->first();
 
         if($lastNomor == null)
         {
@@ -139,7 +140,8 @@ class FormKasBesarController extends Controller
         $data['bank'] = $rekening->nama_bank;
 
 
-        $last = KasBesar::latest()->first();
+        $last = KasBesar::latest()->orderBy('id', 'desc')->first();
+
         if($last == null){
             $data['saldo'] = 0 - $data['nominal_transaksi'];
             $data['modal_investor'] = $data['nominal_transaksi'];
@@ -175,7 +177,8 @@ class FormKasBesarController extends Controller
             }
         }
 
-        $group = GroupWa::where('untuk', 'kas-besar')->first();
+        $dbWa = new GroupWa();
+        $group = $dbWa->where('untuk', 'kas-besar')->first();
 
         $pesan =    "🔴🔴🔴🔴🔴🔴🔴🔴🔴\n".
                     "*Form Pengembalian Deposit*\n".
@@ -192,9 +195,8 @@ class FormKasBesarController extends Controller
                     "Rp. ".number_format($store->modal_investor_terakhir, 0, ',', '.')."\n\n".
                     "Terima kasih 🙏🙏🙏\n".
                     $addPesan;
-                    
-        $send = new StarSender($group->nama_group, $pesan);
-        $res = $send->sendGroup();
+
+        $send = $dbWa->sendWa($group->nama_group, $pesan);
 
         return redirect()->route('billing.index')->with('success', 'Data berhasil disimpan');
 

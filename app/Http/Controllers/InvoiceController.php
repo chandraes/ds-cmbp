@@ -109,7 +109,7 @@ class InvoiceController extends Controller
         }
 
         $group = GroupWa::where('untuk', 'kas-besar')->first();
-        $last = KasBesar::latest()->first();
+        $last = KasBesar::latest()->orderBy('id', 'desc')->first();
 
         $lastNomor = KasBesar::whereNotNull('nomor_kode_tagihan')->latest()->first();
 
@@ -227,7 +227,7 @@ class InvoiceController extends Controller
 
         $group = GroupWa::where('untuk', 'kas-besar')->first();
 
-        $last = KasBesar::latest()->first();
+        $last = KasBesar::latest()->orderBy('id', 'desc')->first();
 
         if ($last) {
             $dbKas = new KasBesar();
@@ -378,7 +378,7 @@ class InvoiceController extends Controller
     public function invoice_bonus_lunas(InvoiceBonus $invoice)
     {
 
-        $last = KasBesar::latest()->first();
+        $last = KasBesar::latest()->orderBy('id', 'desc')->first();
 
         if ($last->saldo < $invoice->sisa_bonus) {
             return redirect()->back()->with('error', 'Saldo Kas Besar tidak mencukupi');
